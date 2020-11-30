@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
+<head>
+<title>Easy_Shop</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+</head>
+
+<body id="top" >
+
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row0">
+  <div id="topbar" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <div class="fl_left">
+      <ul class="nospace">
+        <li><a href="/home"><i class="fas fa-home fa-lg"></i></a></li>
+        <li><a href="/abut">אודות</a></li>
+        <li><a href="#">צור קשר</a></li>
+        {% if user.is_authenticated %}
+          {% if user.is_staff %}
+          <li>hello, {{user.username}}</li>
+          {% else %}
+          <li>hello, {{user.first_name}}</li>
+          {% endif %}
+          <li><a href="logout">התנתק</a></li>
+        {% else %}
+        <li><a href="/Registar">הירשם</a></li>
+        <li><a href="accounts/login">התחבר</a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="fl_right">
+      <ul class="nospace">
+        <li><i class="fas fa-phone rgtspace-5"></i> +972 (050) 959 1553</li>
+        <li><i class="fas fa-envelope rgtspace-5"></i> EasyShop@gmail.il</li>
+      </ul>
+    </div>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+  <div class="wrapper row1">
+
+  <header id="header" class="clear" style="background-color:#555353">
+
+    <!-- ################################################################################################ -->
+    <div id="logo" class="one_half first">
+          <style>
+        h1 {text-align: center;}
+        h2 {text-align: center;}
+        h5 {text-align: center;}
+        p {text-align: right;}
+        div {text-align: right;}
+         </style>
+      <h1 class="logoname"><a href="/home"><span>Easy</span>Shop</a></h1></br>
+      <h2 class="logoname"><a href="/home"><span>Buy</span>Online!</a></h2>
+    </div>
+    <div class="one_half">
+      <ul class="nospace clear">
+        <li class="one_half first">
+
+        </li>
+        <li class="one_half">
+
+        </li>
+      </ul>
+    </div>
+    <!-- ################################################################################################ -->
+
+  </header>
+
+
+<div class="wrapper bgded overlay" style="background-image:url('static/images/demo/backgrounds/back.png');">
+
+  <footer id="footer" class="hoc clear">
+
+    <!-- ################################################################################################ -->
+      {% csrf_token %}
+    <div class="sectiontitle">
+      <font size="9" color="orange">הירשם כבעל עסק</font><br>
+      <font size="5" color="white">וקבל חנות אינטרנטית</font><br>
+
+
+      <form  action="Business" method="post">
+        {% csrf_token %}
+        <fieldset>
+          <legend>Custmer Register:</legend>
+            <style>
+                ::placeholder {color:white;}
+            </style>
+
+          <p class="btmspace+30">*:שם משתמש</p>
+          <input class="btmspace-15"  type="text" name="username" placeholder="Name">
+          <p class="btmspace+30">*:שם העסק</p>
+          <input class="btmspace-15" type="text" name="NameBusiness" placeholder="Business Name">
+          <!-- <p class="btmspace+30">*:</p> !-->
+          <p class="btmspace+30">*:קטגוריה</p>
+          <input class="btmspace" type="text" name="Category" placeholder="Category">
+          <p class="btmspace+30">*:כתובת מלאה</p>
+          <input class="btmspace" type="text" name="addres" placeholder="Address">
+          <p class="btmspace+30">*:כתובת דואר אלקטרוני</p>
+          <input class="btmspace" type="email" name="email" placeholder="Email">
+          <p class="btmspace+30">*:מספר פלאפון</p>
+          <input class="btmspace" type="text" name="Phone" placeholder="Phone Number">
+          <p class="btmspace+30">*:סיסמה</p>
+          <input class="btmspace" type="password" name="password1" placeholder="Password">
+          <p class="btmspace+30">*:אישור סיסמה</p>
+          <input class="btmspace" type="password" name="password2" placeholder="Confirm Password"></br>
+          <style>
+            div {text-align: center;}
+          </style>
+          <footer><button class="btn" type="submit">הירשם</button></footer>
+
+          </fieldset>
+      </form>
+  </div>
+    <!-- ################################################################################################ -->
+  </footer>
+
+    </div>
+  </div>
+</body>
+</html>

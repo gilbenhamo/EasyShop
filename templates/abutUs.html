@@ -28,8 +28,17 @@ Licence URI: https://www.os-templates.com/template-terms
         <li><a href="/home"><i class="fas fa-home fa-lg"></i></a></li>
         <li><a href="/abut">אודות</a></li>
         <li><a href="#">צור קשר</a></li>
-        <li><a href="#">הירשם</a></li>
-        <li><a href="#">התחבר</a></li>
+        {% if user.is_authenticated %}
+          {% if user.is_staff %}
+          <li>hello, {{user.username}}</li>
+          {% else %}
+          <li>hello, {{user.first_name}}</li>
+          {% endif %}
+          <li><a href="accounts/logout">התנתק</a></li>
+        {% else %}
+        <li><a href="/Registar">הירשם</a></li>
+        <li><a href="accounts/login">התחבר</a></li>
+        {% endif %}
       </ul>
     </div>
     <div class="fl_right">
