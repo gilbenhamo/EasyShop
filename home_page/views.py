@@ -6,7 +6,7 @@ def home(request):
         return render(request, 'index.html')
 
 def Abutus(request):
-        return render(request,'abutUs.html')
+        return render(request, 'abutUs.html')
 
 def Registar(request):
         return render(request,'Registar.html')

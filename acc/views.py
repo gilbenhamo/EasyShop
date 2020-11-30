@@ -17,6 +17,7 @@ def EqualPassword(pass1,pass2):
 def EmailIsExists(email):
     return baseUser.objects.filter(email=email).exists()
 # Create your views here.
+
 def custmer(request):
     if request.method == 'POST':
         full_name = request.POST['full_name']
@@ -70,6 +71,7 @@ def Business(request):
             #     messages.info(request, 'Email taken')
             #     return redirect('/acc/custmer')
             # else:
+
             user = baseUser.object.create_business(email=email, full_name=full_name, password=password1,
                                                    address=address, phone=phone, Category=Category, BusinessName=BusinessName)
             user.save()
