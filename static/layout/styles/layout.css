@@ -47,7 +47,13 @@ File: Layout CSS
 
 #header div:last-child{margin-bottom:0;}/* Used when elements stack in small viewports */
 
+/* Abut ------------------------------------------------------------------------------------------------*/
+#abut{padding:180px 0;}
 
+#abut article{display:block; max-width:80%;}
+#abut .heading{margin-bottom:65px; font-size:5rem;}
+#abut p:first-of-type{margin:2 5 20px 2; text-transform:uppercase; font-size:1.6rem; letter-spacing:5px;}
+#abut footer{margin-top:50px;}
 /* Page Intro
 --------------------------------------------------------------------------------------------------------------- */
 #pageintro{padding:180px 0;}
