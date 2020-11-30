@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User,auth
 import psycopg2
 from django.shortcuts import render, redirect
-from accounts.models import BusinessOwner,user
+
 from django.contrib.auth.base_user import AbstractBaseUser,BaseUserManager
 from accounts.security import BusinessUserBackend
 
