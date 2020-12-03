@@ -1,0 +1,107 @@
+{% extends 'TopBase.html' %}
+{% load static %}
+
+{% block content %}
+
+  <nav id="mainav" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <ul class="clear">
+      <li class="active"><a href="/home">דף הבית</a></li>
+      <li><a class="drop" href="#">קטגוריות</a>
+        <ul>
+          <li><a href="pages/gallery.html">מסעדות</a></li> <!--if press, send to this address (pages/gallery.html)-->
+          <li><a href="pages/full-width.html">הכל לבית</a></li>
+          <li><a href="pages/sidebar-left.html">חיות</a></li>
+          <li><a href="pages/sidebar-right.html">מוצרי חשמל</a></li>
+          <li><a href="/basic">צעצועים</a></li>
+          <li><a href="pages/font-icons.html">אנשי מקצוע</a></li>
+        </ul>
+      </li>
+
+      <li><a class="drop" href="#">מידע</a>
+        <ul>
+          <li><a href="#">על האתר</a></li>
+          <li><a class="drop" href="abut">Level 2 + Drop</a>
+            <ul>
+              <li><a href="#">Level 3</a></li>
+              <li><a href="#">Level 3</a></li>
+              <li><a href="#">Level 3</a></li>
+            </ul>
+          </li>
+          <li><a href="#">צוות התכנות של האתר</a></li>
+        </ul>
+      </li>
+
+      <li><a href="#">חנויות פופלוריות</a></li>
+      <li><a href="#">חיפוש חנות</a></li>
+      <!--<li><a href="#">Link Text</a></li>-->
+      <!--<li><a href="#">Long Link Text</a></li>-->
+    </ul>
+    <!-- ################################################################################################ -->
+  </nav>
+</div>
+
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+
+<div class="wrapper bgded overlay" style="{% static "'background-image:url('images/demo/backgrounds/01.png');"%}">
+  <div id="pageintro" class="hoc clear">
+      <style>
+        h1 {text-align: center;}
+        p {text-align: center;}
+        div {text-align: center;}
+  </style>
+    <!-- ################################################################################################ -->
+        {% if user.is_authenticated %}
+        <footer><a class="btn" href="/abut">מי אנחנו</a></footer>
+        {% else %}
+              <p>הגיע הזמן לשנות את הרגלי הקנייה שלנו</p>
+      <h3 class="heading">קניות מכל עסק מכל מקום</h3>
+      <p>בעזרתנו אתה בעל העסק תוכל לפתוח חנות אינטרנטית</p>
+      <footer><a class="btn" href="/Registar">הירשם ופתח חנות</a></footer>
+        {% endif %}
+
+
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+
+<div class="wrapper row3">
+  <main class="hoc container clear"> 
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+
+    <div class="sectiontitle">
+      <h6 class="heading">חנויות מובילות</h6>
+      <p></p>
+    </div>
+
+    <ul class="nospace group overview">
+
+      <li class="one_third">
+        <figure><a href="#"><img src="{% static 'images/demo/logo.jpeg' %}" alt=""></a>
+          <figcaption>
+            <h6 class="heading">חנות מס' 1</h6>
+            <p>מוצרי חשמל</p>
+          </figcaption>
+        </figure>
+      </li>
+
+      <li class="one_third">
+        <figure><a href="#"><img src="{% static 'images/demo/logo.jpeg' %}" alt=""></a>
+          <figcaption>
+            <h6 class="heading">חנות מס' 2</h6>
+            <p>חומרי בניין</p>
+          </figcaption>
+        </figure>
+      </li>
+
+</body>
+</html>
+
+{% endblock %}

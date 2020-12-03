@@ -1,0 +1,83 @@
+{% load static %}
+
+<!DOCTYPE html>
+<!--
+Template Name: Surogou
+Author: <a href="https://www.os-templates.com/">OS Templates</a>
+Author URI: https://www.os-templates.com/
+Copyright: OS-Templates.com
+Licence: Free to use under our free template licence terms
+Licence URI: https://www.os-templates.com/template-terms
+-->
+<html lang="">
+<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
+<head>
+<title>Easy_Shop</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+</head>
+<body id="top">
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row0">
+  <div id="topbar" class="hoc clear"> 
+    <!-- ################################################################################################ -->
+    <div class="fl_left">
+      <ul class="nospace">
+        <li><a href="{% url 'home' %}"><i class="fas fa-home fa-lg"></i></a></li>
+        <li><a href="/abut">אודות</a></li>
+        <li><a href="#">צור קשר</a></li>
+        <li><a href="{% url 'create_product' %}">הוסף מוצר (זמני)</a></li>
+        {% if user.is_authenticated %}
+          {% if user.is_business %}
+         <li><a href="#">עבור לדף העסק</a></li>
+          {% endif %}
+          <li>שלום, {{user.username}}</li>
+          <li><a href="account/logout">התנתק</a></li>
+        {% else %}
+        <li><a href="/Registar">הירשם</a></li>
+        <li><a href="account/login_r">התחבר</a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="fl_right">
+      <ul class="nospace">
+        <li><i class="fas fa-phone rgtspace-5"></i> +972 (050) 959 1553</li>
+        <li><i class="fas fa-envelope rgtspace-5"></i> EasyShop@gmail.il</li>
+      </ul>
+    </div>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row1">
+
+  <header id="header" class="hoc clear"> 
+    <!-- ################################################################################################ -->
+    <div id="logo" class="one_half first">
+      <h1 class="logoname"><a href="{% url 'home' %}"><span>Easy</span>Shop</a></h1></br>
+      <h2 class="logoname"><a href="{% url 'home' %}"><span>Buy</span>Online!</a></h2>
+    </div>
+    <div class="one_half">
+      <ul class="nospace clear">
+        <li class="one_half first">
+          <div class="block clear"><i class="fas fa-phone"></i> <span><strong class="block">Call Ziv:</strong> +972 (050) 959 1553</span> </div>
+        </li>
+        <li class="one_half">
+          <div class="block clear"><i class="far fa-clock"></i> <span><strong class="block"> Mon. - Sat.:</strong> 24/7</span> </div>
+        </li>
+      </ul>
+    </div>
+    <!-- ################################################################################################ -->
+  </header>
+
+{% block content %}
+
+{% endblock %}
+
+</body>
+</html>

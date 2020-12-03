@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
+<head>
+<title>Easy_Shop</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+</head>
+
+<body id="top" >
+
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row0">
+  <div id="topbar" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <div class="fl_left">
+      <ul class="nospace">
+        <li><a href="{% url 'home' %}"><i class="fas fa-home fa-lg"></i></a></li>
+        <li><a href="/abut">אודות</a></li>
+        <li><a href="#">צור קשר</a></li>
+        {% if user.is_authenticated %}
+          {% if user.is_staff %}
+          <li>hello, {{user.username}}</li>
+          {% else %}
+          <li>hello, {{user.first_name}}</li>
+          {% endif %}
+          <li><a href="logout">התנתק</a></li>
+        {% else %}
+        <li><a href="/Registar">הירשם</a></li>
+        <li><a href="{% url 'login_r'%}">התחבר</a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="fl_right">
+      <ul class="nospace">
+        <li><i class="fas fa-phone rgtspace-5"></i> +972 (050) 959 1553</li>
+        <li><i class="fas fa-envelope rgtspace-5"></i> EasyShop@gmail.il</li>
+      </ul>
+    </div>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+  <div class="wrapper row1">
+
+  <header id="header" class="clear" style="background-color:#555353">
+
+    <!-- ################################################################################################ -->
+    <div id="logo" class="one_half first">
+          <style>
+        h1 {text-align: center;}
+        h2 {text-align: center;}
+        h5 {text-align: center;}
+        p {text-align: right;}
+        div {text-align: right;}
+         </style>
+      <h1 class="logoname"><a href="{% url 'home' %}"><span>Easy</span>Shop</a></h1></br>
+      <h2 class="logoname"><a href="{% url 'home' %}"><span>Buy</span>Online!</a></h2>
+    </div>
+    <div class="one_half">
+      <ul class="nospace clear">
+        <li class="one_half first">
+
+        </li>
+        <li class="one_half">
+
+        </li>
+      </ul>
+    </div>
+    <!-- ################################################################################################ -->
+
+  </header>
+
+
+<div class="wrapper bgded overlay" style="background-image:url('static/images/demo/backgrounds/back.png');">
+
+  <footer id="footer" class="hoc clear">
+
+    <!-- ################################################################################################ -->
+
+     <div class="sectiontitle">
+      <font size="9" color="orange">הירשם עכשיו כצרכן</font><br>
+      <font size="5" color="white">ותוכל עוד היום לקנות בצורה מקוונת</font></br>
+       </br>
+
+
+
+      <form  action="{% url 'customer_register' %}" method="post" novalidate>
+        {% csrf_token %}
+        {{form}}
+      </br>
+        <button class="btn" type="submit">הירשם</button>
+      </form>
+      <div>
+        {% for message in messages %}
+        <h3>{{message}}</h3>
+        {% endfor %}
+      </div>
+  </div>
+    <!-- ################################################################################################ -->
+  </footer>
+
+    </div>
+  </div>
+</body>
+</html>
