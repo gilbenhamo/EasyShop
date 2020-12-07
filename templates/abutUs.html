@@ -1,0 +1,167 @@
+{% extends 'TopBase.html' %}
+<!--hey i am hungary-->
+{% load static %}
+
+{% block content %}
+
+  <nav id="mainav" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <ul class="clear">
+      <li class="active"><a href="/home">דף הבית</a></li>
+
+      <li><a class="drop" href="#">קטגוריות</a>
+        <ul>
+          <li><a href="pages/gallery.html">מסעדות</a></li> <!--if press, send to this address (pages/gallery.html)-->
+          <li><a href="pages/full-width.html">הכל לבית</a></li>
+          <li><a href="pages/sidebar-left.html">חיות</a></li>
+          <li><a href="pages/sidebar-right.html">מוצרי חשמל</a></li>
+          <li><a href="pages/basic-grid.html">צעצועים</a></li>
+          <li><a href="pages/font-icons.html">אנשי מקצוע</a></li>
+        </ul>
+      </li>
+
+      <li><a class="drop" href="#">מידע</a>
+        <ul>
+          <li><a href="#">על האתר</a></li>
+          <li><a class="drop" href="abut">Level 2 + Drop</a>
+            <ul>
+              <li><a href="#">Level 3</a></li>
+              <li><a href="#">Level 3</a></li>
+              <li><a href="#">Level 3</a></li>
+            </ul>
+          </li>
+          <li><a href="#">צוות התכנות של האתר</a></li>
+        </ul>
+      </li>
+
+      <li><a href="#">חנויות פופלוריות</a></li>
+      <li><a href="#">חיפוש חנות</a></li>
+      <!--<li><a href="#">Link Text</a></li>-->
+      <!--<li><a href="#">Long Link Text</a></li>-->
+    </ul>
+    <!-- ################################################################################################ -->
+  </nav>
+</div>
+
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+
+    <div class="sectiontitle">
+      <h2 class="heading">צוות פיתוח האתר</h2>
+      <p></p>
+    </div>
+
+    <ul class="nospace group overview">
+
+      <li class="one_third">
+        <figure><a href="#ziv"><img src="{% static 'images/demo/Ziv1.jpg' %}" alt=""></a>
+          <figcaption>
+            <h6 class="heading">זיו אבוטבול (26)</h6>
+            <p>סטודנט שנה ב' להנדסת תוכנה במכללת סמי שמעון</p>
+          </figcaption>
+        </figure>
+      </li>
+          <li class="one_third">
+        <figure><a href="#itzik"><img src="{% static 'images/demo/itzik.jpg' %}" alt=""></a>
+          <figcaption>
+            <h6 class="heading">איציק רחמים (26)</h6>
+            <p>סטודנט שנה ב' להנדסת תוכנה במכללת סמי שמעון</p>
+          </figcaption>
+        </figure>
+      </li>
+              <li class="one_third">
+        <figure><a href="#gil"><img src="{% static 'images/demo/gil.jpg' %}" alt=""></a>
+          <figcaption>
+            <h6 class="heading">גיל בן חמו (24)</h6>
+            <p>סטודנט שנה ב' להנדסת תוכנה במכללת סמי שמעון</p>
+          </figcaption>
+        </figure>
+      </li>
+              <li class="one_third">
+        <figure><a href="#yuval"><img src="{% static 'images/demo/yuval.jpg' %}" alt=""></a>
+          <figcaption>
+            <h6 class="heading">יובל אפרת (26)</h6>
+            <p>סטודנט שנה ב' להנדסת תוכנה במכללת סמי שמעון</p>
+          </figcaption>
+        </figure>
+      </li>
+            <div class="clear"></div>
+  </main>
+</div>
+<div class="wrapper bgded overlay" id="ziv" style="{% static "'background-image:url('images/demo/backgrounds/01.png');"%}">
+  <style>
+h1 {text-align: center;}
+p {text-align: center;}
+div {text-align: center;}
+</style>
+  <div id="pageintro" class="hoc clear">
+    <!-- ################################################################################################ -->
+        <p> : זיו    אבוטבול         (26)                                   </p>
+        <p>סטודנט שנה ב' להנדסת תוכנה במכללת סמי שמעון.</p>
+        <p>רקע תכנותי: C ,CPP ,PYTHON, ASSEMBLY.</p>
+        <p>רקע כללי:ניסיון ניהולי בתחום המסעדנות, רקע עשיר בקרב עסקים קטנים, והבנת הצרכים הרלונטיים.</p>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+</div>
+<div class="wrapper bgded overlay" id="itzik" style="{% static "'background-image:url('images/demo/backgrounds/01.png');"%}">
+  <style>
+h1 {text-align: center;}
+p {text-align: center;}
+div {text-align: center;}
+</style>
+  <div id="pageintro" class="hoc clear">
+    <!-- ################################################################################################ -->
+
+       <p>:איציק רחמים (26)</p>
+        <p>סטודנט שנה ב' להנדסת תוכנה במכללת סמי שמעון.</p>
+        <p>רקע תכנותי: C ,CPP ,PYTHON, ASSEMBLY.</p>
+        <p>רקע כללי: ניסיון עבודה בצוות, ניהול צוותים, רקע בעסקים והבנת צרכיהם.</p>
+        <p></p>
+
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<div class="wrapper bgded overlay" id="gil" style="{% static "'background-image:url('images/demo/backgrounds/01.png');"%}">
+  <style>
+h1 {text-align: center;}
+p {text-align: center;}
+div {text-align: center;}
+</style>
+  <div id="pageintro" class="hoc clear">
+    <!-- ################################################################################################ -->
+
+      <p>:גיל בן חמו (24)</p>
+      <p>סטודנט שנה ב' להנדסת תוכנה במכללת סמי שמעון.</p>
+      <p>רקע תכנותי: C ,CPP ,PYTHON,JS ,ASSEMBLY .</p>
+      <p>רקע כללי: ניסיון בעבודה ובהובלת צוותים.</p>
+      <p></p>
+
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<div class="wrapper bgded overlay" id="yuval" style="{% static "'background-image:url('images/demo/backgrounds/01.png');"%}">
+  <style>
+h1 {text-align: center;}
+p {text-align: center;}
+div {text-align: center;}
+</style>
+  <div id="pageintro" class="hoc clear">
+    <!-- ################################################################################################ -->
+
+      <p>יובל אפרת (26):</p>
+      <p>סטודנט שנה ב' להנדסת תוכנה במכללת סמי שמעון.</p>
+      <p>רקע תכנותי: C ,CPP ,PYTHON, ASSEMBLY.</p>
+      <p>רקע כללי: ניסיון עבודה בעסקים רבים (קטנים וגדולים), הכרה עמוקה של צרכיהם.</p>
+      <p></p>
+
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+{% endblock %}

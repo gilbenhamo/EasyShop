@@ -1,0 +1,258 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<title>Profile Business</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+</head>
+<body id="top">
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row0">
+  <div id="topbar" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <div class="fl_left">
+      <ul class="nospace">
+        <li><a href="{% url 'home' %}"><i class="fas fa-home fa-lg"></i></a></li>
+        <li><a href="/abut">אודות</a></li>
+        <li><a href="#">צור קשר</a></li>
+        {% if user.is_authenticated %}
+          <li>שלום, {{user.business.business_name}}</li>
+          <li><a href="account/logout">התנתק</a></li>
+        {% else %}
+        <li><a href="/Registar">הירשם</a></li>
+        <li><a href="account/login_r">התחבר</a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="fl_right">
+      <ul class="nospace">
+        <li><i class="fas fa-phone rgtspace-5"></i> +972 (050) 959 1553</li>
+        <li><i class="fas fa-envelope rgtspace-5"></i> EasyShop@gmail.il</li>
+      </ul>
+    </div>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row1">
+
+  <header id="header" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <div id="logo" class="one_half first">
+      <h1 class="logoname"><a href="{% url 'home' %}"><span>Easy</span>Shop</a></h1></br>
+      <h2 class="logoname"><a href="{% url 'home' %}"><span>Buy</span>Online!</a></h2>
+    </div>
+    <div class="one_half">
+      <ul class="nospace clear">
+        <li class="one_half first">
+          <div class="block clear"><i class="fas fa-phone"></i> <span><strong class="block">Call Ziv:</strong> +972 (050) 959 1553</span> </div>
+        </li>
+        <li class="one_half">
+          <div class="block clear"><i class="far fa-clock"></i> <span><strong class="block"> Mon. - Sat.:</strong> 24/7</span> </div>
+        </li>
+      </ul>
+    </div>
+    <!-- ################################################################################################ -->
+  </header>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper bgded overlay" style="background-image:url('../images/demo/backgrounds/01.png');">
+  <div id="mainav" class="hoc clear">
+    <!-- ################################################################################################ -->
+
+    <ul>
+      <font size="5">
+      <b><li><a href="{% url 'create_product' %}">|הוסף מוצר|</a></li>
+      <li><a href="#">|המוצרים שלי|</a></li>
+      <li><a href="#">|הזמנות|</a></li>
+      <li><a href="#">|היסטורית הזמנות|</a></li></b>
+      </font>
+    </ul>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+    <div class="sidebar one_quarter first">
+      <!-- ################################################################################################ -->
+      <h6>הפרופיל שלי</h6>
+      <nav class="sdb_holder">
+        <ul>
+          <li><a href="#">הזמנות שלי</a>
+            <ul>
+              <li><a href="#">החנות שלי</a></li>
+              <li><a href="#">עריכת החנות שלי</a></li>
+            </ul>
+          </li>
+          <li><a href="#">הזמנות שלי</a>
+            <ul>
+              <li><a href="#">הזמנות מוכנות</a></li>
+              <li><a href="#">הסטורית הזמנות</a>
+
+      </nav>
+      <div class="sdb_holder">
+        <h6>:פרטי העסק</h6>
+        <address>
+        First Name:{{user.first_name}}<br>
+        last Name:{{user.last_name}}<br>
+        business Name:{{user.business.business_name}}<br>
+        Address: {{user.business.business_address}}<br>
+        <!--business phone: {{user.business.business_phone}}<br>-->
+        <br>
+        Tel: {{user.business.business_phone}}<br>
+        Email: <a href="#">{{user.email}}</a>
+        </address>
+      </div>
+      <div class="sdb_holder">
+        <article>
+          <h6> :אודות העסק </h6>
+          <p>{{user.business.business_info}}</p>
+      </div>
+      <!-- ################################################################################################ -->
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div class="content three_quarter">
+      <!-- ################################################################################################ -->
+
+
+      <h1>המוצרים שלי</h1>
+      <div class="scrollable">
+        <table>
+          <thead>
+            <tr>
+              <th>שם המוצר</th>
+              <th>מחיר המוצר</th>
+              <th>מלאי</th>
+              <th>כמות מכירות</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="#"></a></td>
+              <td>Value 2</td>
+              <td>Value 3</td>
+              <td>Value 4</td>
+            </tr>
+            <tr>
+              <td>Value 5</td>
+              <td>Value 6</td>
+              <td>Value 7</td>
+              <td><a href="#">Value 8</a></td>
+            </tr>
+            <tr>
+              <td>Value 9</td>
+              <td>Value 10</td>
+              <td>Value 11</td>
+              <td>Value 12</td>
+            </tr>
+            <tr>
+              <td>Value 13</td>
+              <td><a href="#">Value 14</a></td>
+              <td>Value 15</td>
+              <td>Value 16</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="comments">
+        <h2>ביקורת על החנות</h2>
+        <ul>
+          <li>
+            <article>
+              <header>
+                <figure class="avatar"><img src="../images/demo/avatar.png" alt=""></figure>
+                <address>
+                By <a href="#">A Name</a>
+                </address>
+                <time datetime="2045-04-06T08:15+00:00">Friday, 6<sup>th</sup> April 2045 @08:15:00</time>
+              </header>
+              <div class="comcont">
+                <p>This is an example of a comment made on a post. You can either edit the comment, delete the comment or reply to the comment. Use this as a place to respond to the post or to share what you are thinking.</p>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article>
+              <header>
+                <figure class="avatar"><img src="../images/demo/avatar.png" alt=""></figure>
+                <address>
+                By <a href="#">A Name</a>
+                </address>
+                <time datetime="2045-04-06T08:15+00:00">Friday, 6<sup>th</sup> April 2045 @08:15:00</time>
+              </header>
+              <div class="comcont">
+                <p>This is an example of a comment made on a post. You can either edit the comment, delete the comment or reply to the comment. Use this as a place to respond to the post or to share what you are thinking.</p>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article>
+              <header>
+                <figure class="avatar"><img src="../images/demo/avatar.png" alt=""></figure>
+                <address>
+                By <a href="#">A Name</a>
+                </address>
+                <time datetime="2045-04-06T08:15+00:00">Friday, 6<sup>th</sup> April 2045 @08:15:00</time>
+              </header>
+              <div class="comcont">
+                <p>This is an example of a comment made on a post. You can either edit the comment, delete the comment or reply to the comment. Use this as a place to respond to the post or to share what you are thinking.</p>
+              </div>
+            </article>
+          </li>
+        </ul>
+        <h2>כתוב ביקורת למנהל תחזוקה</h2>
+        <form action="#" method="post">
+          <div class="one_third first">
+            <label for="name">שם משתמש: <span>*</span></label>
+            <input type="text" name="name" id="name" value="" size="22" required>
+          </div>
+          <div class="one_third">
+            <label for="email">כתובת דואר אלקטרוני <span>*</span></label>
+            <input type="email" name="email" id="email" value="" size="22" required>
+          </div>
+          <div class="one_third">
+            <label for="url">נושא:</label>
+            <input type="url" name="url" id="url" value="" size="22">
+          </div>
+          <div class="block clear">
+            <label for="comment">כתיבת ביקורת</label>
+            <textarea name="comment" id="comment" cols="25" rows="10"></textarea>
+          </div>
+          <div>
+            <input type="submit" name="submit" value="שליחת ביקורת">
+            &nbsp;
+            <input type="reset" name="reset" value="איפוס ביקורת">
+
+
+          </div>
+        </form>
+      </div>
+      <!-- ################################################################################################ -->
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- / main body -->
+    <div class="clear"></div>
+  </main>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+
+</body>
+</html>
