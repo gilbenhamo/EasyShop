@@ -24,7 +24,7 @@
         <li><a href="#">צור קשר</a></li>
         {% if user.is_authenticated %}
           <li>שלום, {{user.business.business_name}}</li>
-          <li><a href="account/logout">התנתק</a></li>
+          <li><a href="{% url 'logout' %}">התנתק</a></li>
         {% else %}
         <li><a href="/Registar">הירשם</a></li>
         <li><a href="account/login_r">התחבר</a></li>
@@ -66,16 +66,19 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
-<div class="wrapper bgded overlay" style="background-image:url('../images/demo/backgrounds/01.png');">
-  <div id="mainav" class="hoc clear">
+<div class="wrapper bgded overlay" style="background-color:#e9a00e">
+  <div id="mainav" class="clear" style="background-color:#ffffff
     <!-- ################################################################################################ -->
-
     <ul>
       <font size="5">
+      {% if user.id == get_user.id %}
       <b><li><a href="{% url 'create_product' %}">|הוסף מוצר|</a></li>
       <li><a href="#">|המוצרים שלי|</a></li>
       <li><a href="#">|הזמנות|</a></li>
       <li><a href="#">|היסטורית הזמנות|</a></li></b>
+        {% else %}
+        <li><a href="#">|עבור לעגלת חנות|</a></li>
+        {% endif %}
       </font>
     </ul>
     <!-- ################################################################################################ -->
@@ -84,13 +87,16 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
-<div class="wrapper row3">
-  <main class="hoc container clear">
+<div class="wrapper row3" >
+  <main class="clear">
     <!-- main body -->
     <!-- ################################################################################################ -->
-    <div class="sidebar one_quarter first">
+    <div class="sidebar one_quarter first"   style="background-color:#0e74a5">
+
       <!-- ################################################################################################ -->
-      <h6>הפרופיל שלי</h6>
+{% if user.id == get_user.id %}
+      <h5>הפרופיל שלי</h5>
+
       <nav class="sdb_holder">
         <ul>
           <li><a href="#">הזמנות שלי</a>
@@ -103,76 +109,104 @@
             <ul>
               <li><a href="#">הזמנות מוכנות</a></li>
               <li><a href="#">הסטורית הזמנות</a>
+              {% endif %}
 
       </nav>
-      <div class="sdb_holder">
-        <h6>:פרטי העסק</h6>
+      <div class="sdb_holder" style="background-color:#0e74a5">
+        <h5>:פרטי העסק</h5>
         <address>
-        First Name:{{user.first_name}}<br>
-        last Name:{{user.last_name}}<br>
-        business Name:{{user.business.business_name}}<br>
-        Address: {{user.business.business_address}}<br>
+        First Name:{{get_user.first_name}}<br>
+        last Name:{{get_user.last_name}}<br>
+        business Name:{{get_business.business_name}}<br>
+        Address: {{get_business.business_address}}<br>
         <!--business phone: {{user.business.business_phone}}<br>-->
         <br>
-        Tel: {{user.business.business_phone}}<br>
-        Email: <a href="#">{{user.email}}</a>
+        Tel: {{get_business.business_phone}}<br>
+        Email: <a href="#">{{get_user.email}}</a><br>
+          <br>
+          <br>
+          {% if user.id == get_user.id %}
+            <td><a class="btn btn-sm btn-info" href="{% url 'update_business' get_business.user_id %}">ערכית פרטי העסק</a></td>
+          {% endif %}
         </address>
       </div>
-      <div class="sdb_holder">
+      <div class="sdb_holder" style="background-color:#3183ad">
         <article>
-          <h6> :אודות העסק </h6>
-          <p>{{user.business.business_info}}</p>
+          <h5> :אודות העסק </h5>
+          <p>{{get_business.business_info}}</p>
       </div>
       <!-- ################################################################################################ -->
     </div>
     <!-- ################################################################################################ -->
     <!-- ################################################################################################ -->
+
+
+
     <div class="content three_quarter">
       <!-- ################################################################################################ -->
 
 
-      <h1>המוצרים שלי</h1>
-      <div class="scrollable">
-        <table>
-          <thead>
-            <tr>
-              <th>שם המוצר</th>
-              <th>מחיר המוצר</th>
-              <th>מלאי</th>
-              <th>כמות מכירות</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><a href="#"></a></td>
-              <td>Value 2</td>
-              <td>Value 3</td>
-              <td>Value 4</td>
-            </tr>
-            <tr>
-              <td>Value 5</td>
-              <td>Value 6</td>
-              <td>Value 7</td>
-              <td><a href="#">Value 8</a></td>
-            </tr>
-            <tr>
-              <td>Value 9</td>
-              <td>Value 10</td>
-              <td>Value 11</td>
-              <td>Value 12</td>
-            </tr>
-            <tr>
-              <td>Value 13</td>
-              <td><a href="#">Value 14</a></td>
-              <td>Value 15</td>
-              <td>Value 16</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div id="comments">
-        <h2>ביקורת על החנות</h2>
+
+      <div class="wrapper row3">
+  <main class="clear">
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+
+    <div class="sectiontitle">
+      <br>
+      <b><font size="7" color="#0e74a5">המוצרים שלי</font><br></b>
+      <p></p>
+    </div>
+
+    <ul class="nospace">
+    {% for prod in prods %}
+      {% if get_user.id == prod.shop_id_id %}
+      <li class="one_third">
+                  <style>
+        p {text-align: right;}
+        h6 {text-align: right;}
+        h5 {text-align: center;}
+        .row3 {
+           color: black;
+            background-color: #FFFFFF;
+              }
+.overlay {
+    color: #FFFFFF;
+    background-color: inherit;
+    text-align: right;
+}
+.btn, .btn.inverse:hover {
+    color: #FFFFFF;
+    background-color: #F7A804;
+    border-color: #F7A804;
+}
+         </style>
+
+
+        <figure>
+          <figcaption>
+            <h6 class="heading"><a href="#"><img src="{{prod.product_image.url}}" alt="" style="float:left;width:100px;height:100px;"></a> שם המוצר:{{prod.product_name}}       </h6>
+
+            <p>פרטי המוצר:{{prod.product_info}}</p>
+            <p> {{prod.product_amount}} :כמות במלאי</p>
+           <p>  מחיר: {{prod.product_price}} ש"ח</p>
+            {% if user.id == get_user.id %}
+            <td><a class="btn btn-sm btn-info" href="{% url 'update_product' prod.id %}">Update</a></td>
+
+            {% endif %}
+            <button class="btn"  type="submit"  style="background-color:#0e74a5" >הוספת מוצר לעגלה</button>
+            <br>
+            <br>
+          </figcaption>
+        </figure>
+      </li>
+        {% endif %}
+      	{% endfor %}
+      </ul>
+  </div>
         <ul>
+
+            <h5>ביקורת על החנות</h5>
           <li>
             <article>
               <header>
@@ -253,6 +287,7 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
+
 
 </body>
 </html>

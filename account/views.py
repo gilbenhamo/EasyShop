@@ -6,9 +6,10 @@ from django.contrib.auth.forms import AuthenticationForm
 import psycopg2
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from .form import User, CustomerSignUpform, BusinessSignUpform
+from .form import User, CustomerSignUpform, BusinessSignUpform , BusinessUpdeateForm
 from django.contrib.auth.models import auth
 from .models import Business
+from products.models import product
 
 
 class customer_register(CreateView):
@@ -54,6 +55,24 @@ def logout(request):
     auth.logout(request)
     return redirect("home")
 
-def business_profile(request):
-    #business = Business.objects.all()
-    return render(request,'business_profile.html')
+
+def business_profile(request, pk_test):
+    get_business = Business.objects.get(user_id=pk_test)
+    get_user = User.objects.get(id=pk_test)
+    prods = product.objects.all()
+    return render(request, "business_profile.html",
+                  {'prods': prods, 'get_business': get_business, 'get_user': get_user})
+
+
+def update_business(request, pk_test):
+    business = Business.objects.get(user_id=pk_test)
+    form = BusinessUpdeateForm(instance=business,)
+    if request.method == 'POST':
+        form = BusinessUpdeateForm(request.POST, instance=business)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.user_id = request.user
+            instance.save()
+        return redirect('/account/business_profile/{0}/'.format(pk_test))
+    context = {'form': form}
+    return render(request, 'updeateBusiness.html', context)

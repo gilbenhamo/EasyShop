@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 {% load static %}
 
-<!DOCTYPE html>
+
 <!--
 Template Name: Surogou
 Author: <a href="https://www.os-templates.com/">OS Templates</a>
@@ -28,12 +29,12 @@ Licence URI: https://www.os-templates.com/template-terms
       <ul class="nospace">
         <li><a href="{% url 'home' %}"><i class="fas fa-home fa-lg"></i></a></li>
         <li><a href="/abut">אודות</a></li>
-        <li><a href="#">צור קשר</a></li>
+        <li><a href="{% url 'feedback' %}">שלח משוב</a></li>
         {% if user.is_business %}
         {% endif %}
         {% if user.is_authenticated %}
           {% if user.is_business %}
-         <li><a href="/account/business_profile">עבור לדף העסק</a></li>
+         <li><a href="/account/business_profile/{{user.id}}/">עבור לדף העסק</a></li>
           {% endif %}
           <li>שלום, {{user.username}}</li>
           <li><a href="account/logout">התנתק</a></li>

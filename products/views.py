@@ -19,12 +19,12 @@ def create_product(request):
     if User.is_business:
         form = createProduct()
         if request.method == 'POST':
-            form = createProduct(request.POST,  request.FILES)
+            form = createProduct(request.POST, request.FILES)
             if form.is_valid():
                 instance = form.save(commit=False)
                 instance.shop_id = request.user
                 instance.save()
-            return redirect('home')
+            return redirect('/account/business_profile/{0}/'.format(request.user.id))
 
         context = {'form': form}
         return render(request, 'AddProduct.html', context)
@@ -32,7 +32,21 @@ def create_product(request):
         return HttpResponse('Access un-authorized')
 
 
-def prod_pass(request):
-    prods = product.objects.all()
-    
-    return render(request, "business_profile.html", {'prods': prods})
+def update_product(request, pk_test):
+    prod = product.objects.get(id=pk_test)
+    form = createProduct(instance=prod)
+    if request.method == 'POST':
+        form = createProduct(request.POST,request.FILES, instance=prod)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.shop_id = request.user
+            instance.save()
+        return redirect('/account/business_profile/{0}/'.format(request.user.id))
+
+    context = {'form': form}
+    return render(request, 'updeateProduct.html', context)
+
+# def prod_pass(request):
+#     prods = product.objects.all()
+#
+#     return render(request, "business_profile.html", {'prods': prods})
