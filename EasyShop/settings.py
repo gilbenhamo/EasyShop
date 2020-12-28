@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     "home_page",
     "account",
     "products",
+    "review",
+    "cart",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,8 +79,11 @@ WSGI_APPLICATION = 'EasyShop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'che6',
+        'USER': 'postgres',
+        'PASSWORD': '052052',
+        'HOST': 'localhost',
     }
 }
 

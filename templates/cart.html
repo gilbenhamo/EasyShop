@@ -1,0 +1,123 @@
+{% extends 'TopBase.html' %}
+
+{% block content %}
+      <div class="wrapper row3" >
+  <main class="hoc clear" >
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+
+    <div class="sectiontitle">
+      <br>
+      <b><font size="7" color="#0e74a5">העגלה שלי</font><br></b>
+      <br>
+
+      <p></p>
+    </div>
+                  <style>
+        p {text-align: right;}
+        h6 {text-align: right;}
+        h5 {text-align: center;}
+        .row3 {
+           color: black;
+            background-color: #FFFFFF;
+              }
+.overlay {
+    color: #FFFFFF;
+    background-color: inherit;
+    text-align: right;
+}
+.btn, .btn.inverse:hover {
+    color: #FFFFFF;
+    background-color: #F7A804;
+    border-color: #F7A804;
+}
+
+
+         </style>
+    <ul class="nospace">
+    {% for item in order.get_cart_items %}
+
+      <li class="one_third" style="text-align:center;display: contents;" >
+        <figure>
+          <figcaption style="background-color:#3183ad;">
+
+            <h6 class="heading" ><a href="#"></a><b>{{item}} מוצר       </b> </h6>
+              {% endfor %}
+            <p><b>{{ order.get_cart_total }}</b></p>
+            {% if user.is_superuser %}
+         <font size="4"  <td><a class="fas fa-comment-slash" href="/admin/review/comments/{{rev.id}}/change/">  הסרת תגובה</a></td></font>
+          {% endif %}
+
+
+          </figcaption>
+          <br>
+        </figure>
+      </li>
+
+
+
+<footer style="text-align:center"><a class="btn"  href="/account/business_profile/{{busin.user_id}}/">חזרה לדף העסק</a></footer>
+      <br>
+      </ul>
+      </div>
+<div class="wrapper bgded overlay" style="background-image:url('static/images/demo/backgrounds/back.png');">
+
+  <footer id="footer" class="hoc clear">
+
+    <!-- ################################################################################################ -->
+    {% if user.id != busin.user_id %}
+    <div class="sectiontitle">
+      <b><i><font size="9" color="orange">הערות להזמנה</font><br></i></b>
+
+      <form  action="" method="post" enctype="multipart/form-data" novalidate>
+        <style>
+
+          select {color: white;
+          padding: 8px;
+          background-color:#0e74a5;
+          width: 100%;
+          text-align: center;
+          }
+          textarea {
+          color: white;
+          padding: 8px;
+          background-color:#0e74a5;
+          width: 100%;
+          }
+        </style>
+
+      </br>
+        <button class="btn" type="submit">סיום הזמנה</button>
+    {% endif %}
+
+  </div>
+    <!-- ################################################################################################ -->
+  </footer>
+
+    </div>
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+  <div id="copyright" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2020 - By Project#10 - SCE-"Software Engineering Department Year B." </p>
+    <p class="fl_right">Developed by <a target="_blank" href="/abut" title="Project#10 ">2020_21_project#group_10 </a></p>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="../layout/scripts/jquery.min.js"></script>
+<script src="../layout/scripts/jquery.backtotop.js"></script>
+<script src="../layout/scripts/jquery.mobilemenu.js"></script>
+</body>
+</html>
+{% endblock %}
+
+

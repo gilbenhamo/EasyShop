@@ -17,4 +17,5 @@ from django.db.transaction import clean_savepoints
 class createProduct(ModelForm):
     class Meta:
         model = product
-        fields = ['product_name', 'product_info', 'product_price', 'product_amount' , 'product_image']  # '__all__'
+        fields = ['product_name', 'product_info', 'product_price', 'product_amount', 'product_image']  # '__all__'
+

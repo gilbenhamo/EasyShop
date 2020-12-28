@@ -25,5 +25,7 @@ urlpatterns = [
     path('account/', include('account.url')),
     path('products/', include('products.url')),
     path('admin/', admin.site.urls),
+    path('review/', include('review.url')),
+    path('cart/', include('cart.url')),
 
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) #for upload images

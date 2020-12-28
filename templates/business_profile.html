@@ -20,14 +20,14 @@
     <div class="fl_left">
       <ul class="nospace">
         <li><a href="{% url 'home' %}"><i class="fas fa-home fa-lg"></i></a></li>
-        <li><a href="/abut">אודות</a></li>
-        <li><a href="#">צור קשר</a></li>
+        <li><a class="far fa-handshake" href="/abut">  אודות</a></li>
+        <li><a class="far fa-comments" href="{% url 'feedback' %}">  שלח משוב</a></li>
         {% if user.is_authenticated %}
           <li>שלום, {{user.business.business_name}}</li>
-          <li><a href="{% url 'logout' %}">התנתק</a></li>
+          <li><a class="far fa-times-circle" href="{% url 'logout' %}">  התנתק</a></li>
         {% else %}
-        <li><a href="/Registar">הירשם</a></li>
-        <li><a href="account/login_r">התחבר</a></li>
+        <li><a class="far fa-edit" href="/Registar">  הירשם</a></li>
+        <li><a class="far fa-user-circle" href="account/login_r">  התחבר</a></li>
         {% endif %}
       </ul>
     </div>
@@ -66,19 +66,19 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
-<div class="wrapper bgded overlay" style="background-color:#e9a00e">
-  <div id="mainav" class="clear" style="background-color:#ffffff
+<div class="wrapper bgded overlay" style="background-color:#0e74a5">
+  <div id="topbar" class="clear" style="background-color:#e9a00e" >
     <!-- ################################################################################################ -->
-    <ul>
-      <font size="5">
+    <ul style="text-align:center">
+      <font size="4">
       {% if user.id == get_user.id %}
-      <b><li><a href="{% url 'create_product' %}">|הוסף מוצר|</a></li>
-      <li><a href="#">|המוצרים שלי|</a></li>
-      <li><a href="#">|הזמנות|</a></li>
-      <li><a href="#">|היסטורית הזמנות|</a></li></b>
+      <b><li ><a class="fas fa-plus" style="color:#0e74a5" href="{% url 'create_product' %}">     :הוסף מוצר   </a></li>
+      <li><a class="fas fa-book" style="color:#0e74a5" href="#">    :הזמנות</a></li>
+      <li><a class="fas fa-history" style="color:#0e74a5" href="">   :היסטורית הזמנות</a></li></b>
         {% else %}
-        <li><a href="#">|עבור לעגלת חנות|</a></li>
+        <li><a style="color:#0e74a5" class="fas fa-shopping-cart" href="/cart/{{get_user.id}}/">          עבור לעגלת חנות</a></li>
         {% endif %}
+        <li><a style="color:#0e74a5" class="fas fa-comments" href="/review/{{get_user.id}}/">          ביקורות חנות</a></li>
       </font>
     </ul>
     <!-- ################################################################################################ -->
@@ -92,9 +92,8 @@
     <!-- main body -->
     <!-- ################################################################################################ -->
     <div class="sidebar one_quarter first"   style="background-color:#0e74a5">
-
       <!-- ################################################################################################ -->
-{% if user.id == get_user.id %}
+        {% if user.id == get_user.id %}
       <h5>הפרופיל שלי</h5>
 
       <nav class="sdb_holder">
@@ -109,11 +108,14 @@
             <ul>
               <li><a href="#">הזמנות מוכנות</a></li>
               <li><a href="#">הסטורית הזמנות</a>
-              {% endif %}
 
       </nav>
-      <div class="sdb_holder" style="background-color:#0e74a5">
-        <h5>:פרטי העסק</h5>
+               {% endif %}
+      <div class="sdb_holder" style="background-color:#3183ad">
+        <h5><b><u>:פרטי העסק</u></b></h5>
+         {% if user.is_superuser %}
+          <font size="5" <td><a class="fas fa-edit" href="/admin/account/business/{{get_business.user_id}}/change/">ערכית פרופיל  העסק כמנהל</a></td></font>
+          {% endif %}
         <address>
         First Name:{{get_user.first_name}}<br>
         last Name:{{get_user.last_name}}<br>
@@ -126,14 +128,33 @@
           <br>
           <br>
           {% if user.id == get_user.id %}
-            <td><a class="btn btn-sm btn-info" href="{% url 'update_business' get_business.user_id %}">ערכית פרטי העסק</a></td>
+         <font size="5" <td><a  class="fas fa-edit" href="{% url 'update_business' get_business.user_id %}">ערכית פרטי העסק</a> </td></font>
           {% endif %}
+
         </address>
       </div>
       <div class="sdb_holder" style="background-color:#3183ad">
         <article>
-          <h5> :אודות העסק </h5>
+          <h5><a style="color:black" class="fas fa-address-card" >          :אודות העסק</a></h5>
           <p>{{get_business.business_info}}</p>
+      </div>
+           <div class="sdb_holder" style="background-color:#3183ad">
+        <article>
+          <h5><a style="color:black" class="fas fa-bullhorn" >          :לוח הודעות</a></h5>
+          <p>{{get_business.business_massage}}</p>
+          {% if user.id == get_user.id %}
+           <font size="5" <td><a class="fas fa-edit" href="{% url 'create_Massage' get_business.user_id %}">עריכת הודעה</a></td></font>
+          {% endif %}
+
+      </div>
+                 <div class="sdb_holder" style="background-color:#3183ad">
+        <article>
+          <h5><a style="color:black" class="fas fa-donate" >          :לוח מבצעים</a></h5>
+          <p>{{get_business.business_deals}}</p>
+          {% if user.id == get_user.id %}
+          <font size="5"  <td><a class="fas fa-edit" href="{% url 'create_deals' get_business.user_id %}">עריכת מבצעים</a></td></font>
+          {% endif %}
+
       </div>
       <!-- ################################################################################################ -->
     </div>
@@ -157,11 +178,6 @@
       <b><font size="7" color="#0e74a5">המוצרים שלי</font><br></b>
       <p></p>
     </div>
-
-    <ul class="nospace">
-    {% for prod in prods %}
-      {% if get_user.id == prod.shop_id_id %}
-      <li class="one_third">
                   <style>
         p {text-align: right;}
         h6 {text-align: right;}
@@ -181,20 +197,29 @@
     border-color: #F7A804;
 }
          </style>
-
-
+    <ul class="nospace" >
+    {% for prod in prods %}
+      {% if get_user.id == prod.shop_id_id  %}
+      <li class="one_third" >
         <figure>
           <figcaption>
-            <h6 class="heading"><a href="#"><img src="{{prod.product_image.url}}" alt="" style="float:left;width:100px;height:100px;"></a> שם המוצר:{{prod.product_name}}       </h6>
+            <h6 class="heading" ><a href="#"><img src="{{prod.product_image.url}}" alt="" style="float:left;width:100px;height:100px;"></a> {{prod.product_name}} :שם המוצר       </h6>
 
-            <p>פרטי המוצר:{{prod.product_info}}</p>
+            <p>{{prod.product_info}} :פרטי המוצר</p>
             <p> {{prod.product_amount}} :כמות במלאי</p>
            <p>  מחיר: {{prod.product_price}} ש"ח</p>
             {% if user.id == get_user.id %}
-            <td><a class="btn btn-sm btn-info" href="{% url 'update_product' prod.id %}">Update</a></td>
-
+            <font size="4"  <td><a class="fas fa-edit" href="{% url 'update_product' prod.id %}">  :עריכת מוצר</a></td> </font>
             {% endif %}
-            <button class="btn"  type="submit"  style="background-color:#0e74a5" >הוספת מוצר לעגלה</button>
+            {% if user.is_superuser %}
+         <font size="4"  <td><a class="fas fa-edit" href="/admin/products/product/{{prod.id}}/change/">ערכית מוצר עסק כמנהל</a></td></font>
+          {% endif %}
+            {% if user.is_customer %}
+            <a href="{% url 'add_to_cart' prod.id %}" class="btn btn-primary btn-md my-0 p">
+              Add to cart
+              <i class="fas fa-shopping-cart ml-1"></i>
+            </a>
+            {% endif %}
             <br>
             <br>
           </figcaption>
@@ -203,80 +228,9 @@
         {% endif %}
       	{% endfor %}
       </ul>
-  </div>
-        <ul>
-
-            <h5>ביקורת על החנות</h5>
-          <li>
-            <article>
-              <header>
-                <figure class="avatar"><img src="../images/demo/avatar.png" alt=""></figure>
-                <address>
-                By <a href="#">A Name</a>
-                </address>
-                <time datetime="2045-04-06T08:15+00:00">Friday, 6<sup>th</sup> April 2045 @08:15:00</time>
-              </header>
-              <div class="comcont">
-                <p>This is an example of a comment made on a post. You can either edit the comment, delete the comment or reply to the comment. Use this as a place to respond to the post or to share what you are thinking.</p>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article>
-              <header>
-                <figure class="avatar"><img src="../images/demo/avatar.png" alt=""></figure>
-                <address>
-                By <a href="#">A Name</a>
-                </address>
-                <time datetime="2045-04-06T08:15+00:00">Friday, 6<sup>th</sup> April 2045 @08:15:00</time>
-              </header>
-              <div class="comcont">
-                <p>This is an example of a comment made on a post. You can either edit the comment, delete the comment or reply to the comment. Use this as a place to respond to the post or to share what you are thinking.</p>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article>
-              <header>
-                <figure class="avatar"><img src="../images/demo/avatar.png" alt=""></figure>
-                <address>
-                By <a href="#">A Name</a>
-                </address>
-                <time datetime="2045-04-06T08:15+00:00">Friday, 6<sup>th</sup> April 2045 @08:15:00</time>
-              </header>
-              <div class="comcont">
-                <p>This is an example of a comment made on a post. You can either edit the comment, delete the comment or reply to the comment. Use this as a place to respond to the post or to share what you are thinking.</p>
-              </div>
-            </article>
-          </li>
-        </ul>
-        <h2>כתוב ביקורת למנהל תחזוקה</h2>
-        <form action="#" method="post">
-          <div class="one_third first">
-            <label for="name">שם משתמש: <span>*</span></label>
-            <input type="text" name="name" id="name" value="" size="22" required>
-          </div>
-          <div class="one_third">
-            <label for="email">כתובת דואר אלקטרוני <span>*</span></label>
-            <input type="email" name="email" id="email" value="" size="22" required>
-          </div>
-          <div class="one_third">
-            <label for="url">נושא:</label>
-            <input type="url" name="url" id="url" value="" size="22">
-          </div>
-          <div class="block clear">
-            <label for="comment">כתיבת ביקורת</label>
-            <textarea name="comment" id="comment" cols="25" rows="10"></textarea>
-          </div>
-          <div>
-            <input type="submit" name="submit" value="שליחת ביקורת">
-            &nbsp;
-            <input type="reset" name="reset" value="איפוס ביקורת">
-
-
-          </div>
-        </form>
       </div>
+  </main>
+
       <!-- ################################################################################################ -->
     </div>
     <!-- ################################################################################################ -->
@@ -288,6 +242,25 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 
-
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+  <div id="copyright" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2020 - By Project#10 - SCE-"Software Engineering Department Year B." </p>
+    <p class="fl_right">Developed by <a target="_blank" href="/abut" title="Project#10 ">2020_21_project#group_10 </a></p>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="../layout/scripts/jquery.min.js"></script>
+<script src="../layout/scripts/jquery.backtotop.js"></script>
+<script src="../layout/scripts/jquery.mobilemenu.js"></script>
 </body>
 </html>

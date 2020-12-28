@@ -9,11 +9,10 @@ from django.contrib.auth.models import Permission
 # from .decorators import allowed_users
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse
+from django.forms import inlineformset_factory
+from .models import *
 
 
-# Create your views here.
-# @allowed_users(allowed_roles=['is_business'])
-# @permission_required('product.create_product')
 
 def create_product(request):
     if User.is_business:
@@ -46,7 +45,19 @@ def update_product(request, pk_test):
     context = {'form': form}
     return render(request, 'updeateProduct.html', context)
 
-# def prod_pass(request):
-#     prods = product.objects.all()
-#
-#     return render(request, "business_profile.html", {'prods': prods})
+
+def createOrder(request,pk):
+    OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=10)
+    customer = Customer.objects.get(user_id=pk)
+    formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
+    # form = OrderForm(initial={'customer':customer})
+    if request.method == 'POST':
+        # print('Printing POST:', request.POST)
+        # form = OrderForm(request.POST)
+        formset = OrderFormSet(request.POST, instance=customer)
+        if formset.is_valid():
+            formset.save()
+            return redirect('/')
+
+    context = {'form': formset}
+    return render(request, 'order_form.html', context)

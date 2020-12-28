@@ -3,6 +3,17 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import permission_required
 
+from simple_history.models import HistoricalRecords
+
+
+class superMassage(models.Model):
+    super_Massage = models.TextField(max_length=255)
+    history = HistoricalRecords()
+
+    def __str__(self):
+        return 'superMassage: {}'.format(self.super_Massage)
+
+
 class User(AbstractUser):
     is_customer = models.BooleanField(default=False)
     is_business = models.BooleanField(default=False)
@@ -18,6 +29,8 @@ class Customer(models.Model):
     phone = models.CharField(max_length=10)
     age = models.CharField(max_length=200)
 
+    def __str__(self):
+        return 'user: {}'.format(self.user)
 
 
 class Business(models.Model):
@@ -27,13 +40,27 @@ class Business(models.Model):
     business_phone = models.CharField(max_length=10)
     business_info = models.TextField(max_length=255)
     business_category = models.CharField(max_length=50)
+    business_massage = models.TextField(max_length=255)
+    business_deals = models.TextField(max_length=255)
 
     def __str__(self):
-        return f'{self.business_name}Business'
-
+        return 'business_name: {}'.format(self.business_name)
 
     def get_Business_Name(self):
         return self.business_name
 
 
 User.add_to_class('Business', models.ManyToManyField('self', symmetrical=False))
+
+
+class Categories(models.Model):
+    category_name = models.CharField(max_length=25)
+
+    @staticmethod
+    def get_all_categories():
+        return Categories.objects.all()
+
+    def __str__(self):
+        return self.category_name
+
+

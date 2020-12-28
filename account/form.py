@@ -2,19 +2,26 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from django.forms import forms, CharField
 from django import forms
-from .models import User, Customer, Business
+from .models import User, Customer, Business ,Categories
 from django.forms import ModelForm
 from django.db.transaction import clean_savepoints
-CATEGORY_BUSINESS = (
-    (1, 'מוצרי חשמל'),
-    (2, "מוצרים לבית"),
-    (3, "מוצרים למחשב"),
-    (4, "מוצרים לגינה"),
-    (5, "אוכל"),
-)
 
+# CATEGORY_BUSINESS = [
+#     (1, 'מוצרי חשמל'),
+#     (2, "מוצרים לבית"),
+#     (3, "מוצרים למחשב"),
+#     (4, "מוצרים לגינה"),
+#     (5, "אוכל"),
+# ]
+CATEGORY_BUSINESS=[]
+categs = Categories.get_all_categories()
+index=1
+#in case of new DB delete this for and then do makemigrations and migrate afther run server you can return this
+for categ in categs:
+    CATEGORY_BUSINESS.append((index,categ.category_name))
+    index+=1
 
-
+print(CATEGORY_BUSINESS)
 
 class CustomerSignUpform(UserCreationForm):
     first_name = forms.CharField(required=True)
@@ -75,49 +82,7 @@ class BusinessSignUpform(UserCreationForm):
         business.business_category = self.cleaned_data.get('business_category')
         business.save()
         return user
-from django.contrib.auth.forms import UserCreationForm
-from django.db import transaction
-from django.forms import forms, CharField
-from django import forms
-from .models import User, Customer, Business
-from django.db.transaction import clean_savepoints
-CATEGORY_BUSINESS = (
-    (1, 'מוצרי חשמל'),
-    (2, "מוצרים לבית"),
-    (3, "מוצרים למחשב"),
-    (4, "מוצרים לגינה"),
-    (5, "אוכל"),
-)
 
-
-
-
-class CustomerSignUpform(UserCreationForm):
-    first_name = forms.CharField(required=True)
-    last_name = forms.CharField(required=True)
-    address = forms.CharField(required=True)
-    phone = forms.CharField(required=True)
-    age = forms.CharField(required=True)
-
-    class Meta(UserCreationForm.Meta):
-        model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'address', 'phone', 'age')
-
-    @transaction.atomic
-    def save(self):
-        user = super().save(commit=False)
-        user.is_customer = True
-        user.username = self.cleaned_data.get('username')
-        user.first_name = self.cleaned_data.get('first_name')
-        user.last_name = self.cleaned_data.get('last_name')
-        user.email = self.cleaned_data.get('email')
-        user.save()
-        customer = Customer.objects.create(user=user)
-        customer.address = self.cleaned_data.get('address')
-        customer.phone = self.cleaned_data.get('phone')
-        customer.age = self.cleaned_data.get('age')
-        customer.save()
-        return user
 
 
 class BusinessUpdeateForm(ModelForm):
@@ -133,3 +98,20 @@ class BusinessUpdeateForm(ModelForm):
                   'business_info', 'business_category')
 
 
+class createMassage(ModelForm):
+    class Meta:
+        model = Business
+        fields = ('business_massage',)
+
+
+class createDeals(ModelForm):
+    class Meta:
+        model = Business
+        fields = ('business_deals',)
+
+
+
+class createCategories(ModelForm):
+    class Meta:
+        model = Categories
+        fields = ('category_name',)

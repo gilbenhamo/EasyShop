@@ -22,18 +22,18 @@
     <div class="fl_left">
       <ul class="nospace">
         <li><a href="{% url 'home' %}"><i class="fas fa-home fa-lg"></i></a></li>
-        <li><a href="/abut">אודות</a></li>
-        <li><a href="#">צור קשר</a></li>
+        <li><a class="far fa-handshake" href="/abut">  אודות</a></li>
+        <li><a class="far fa-comments" href="{% url 'feedback' %}">  שלח משוב</a></li>
         {% if user.is_authenticated %}
           {% if user.is_staff %}
           <li>hello, {{user.username}}</li>
           {% else %}
           <li>hello, {{user.first_name}}</li>
           {% endif %}
-          <li><a href="logout">התנתק</a></li>
+          <li><a class="far fa-times-circle" href="logout">   התנתק</a></li>
         {% else %}
-        <li><a href="/Registar">הירשם</a></li>
-        <li><a href="{% url 'login_r'%}">התחבר</a></li>
+        <li><a class="far fa-edit" href="/Registar">  הירשם</a></li>
+        <li><a class="far fa-user-circle" href="{% url 'login_r'%}">  התחבר</a></li>
         {% endif %}
       </ul>
     </div>
@@ -90,7 +90,14 @@
      <b> <font size="9" color="#e9a00e">הירשם כבעל עסק</font></b></br>
      <b> <font size="5" color="#e9a00e">וקבל חנות אינטרנטית</font></b></br>
 
-
+         {% if user.is_authenticated %}
+      <style>
+        h1 { color:white;}
+      </style>
+        <h1>את/ה כבר מחובר/ת </h1>
+        <h1>את/ה כבר מחובר/ת בשביל להירשם  עלייך להתנתק ולחזור לעמוד זה</h1>
+        <footer><a class="btn" href="{% url 'logout' %}">התנתק</a>
+        {% else %}
       <form  action="{% url 'business_register' %}" method="post" novalidate>
         <style>
         label {
@@ -113,10 +120,17 @@
           background-color:#0e74a5;
           width: 100%;
           }
+          ::marker {
+            color:red;
+            background-color:red;
+            text-color:red;
+}
+    li { color:red;}
         </style>
         {% csrf_token %}
         {{form}}
           <footer><button class="btn" type="submit">הירשם</button></footer>
+          {% endif %}
       </form>
   </div>
     <!-- ################################################################################################ -->
@@ -124,5 +138,25 @@
 
     </div>
   </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+  <div id="copyright" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2020 - By Project#10 - SCE-"Software Engineering Department Year B." </p>
+    <p class="fl_right">Developed by <a target="_blank" href="/abut" title="Project#10 ">2020_21_project#group_10 </a></p>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="../layout/scripts/jquery.min.js"></script>
+<script src="../layout/scripts/jquery.backtotop.js"></script>
+<script src="../layout/scripts/jquery.mobilemenu.js"></script>
 </body>
 </html>
