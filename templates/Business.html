@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="he">
 
 <!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
 <head>
@@ -21,19 +21,19 @@
     <!-- ################################################################################################ -->
     <div class="fl_left">
       <ul class="nospace">
-        <li><a href="/home"><i class="fas fa-home fa-lg"></i></a></li>
-        <li><a href="/abut">אודות</a></li>
-        <li><a href="#">צור קשר</a></li>
+        <li><a href="{% url 'home' %}"><i class="fas fa-home fa-lg"></i></a></li>
+        <li><a class="far fa-handshake" href="/abut">  אודות</a></li>
+        <li><a class="far fa-comments" href="{% url 'feedback' %}">  שלח משוב</a></li>
         {% if user.is_authenticated %}
           {% if user.is_staff %}
           <li>hello, {{user.username}}</li>
           {% else %}
           <li>hello, {{user.first_name}}</li>
           {% endif %}
-          <li><a href="logout">התנתק</a></li>
+          <li><a class="far fa-times-circle" href="logout">   התנתק</a></li>
         {% else %}
-        <li><a href="/Registar">הירשם</a></li>
-        <li><a href="acc/login">התחבר</a></li>
+        <li><a class="far fa-edit" href="/Registar">  הירשם</a></li>
+        <li><a class="far fa-user-circle" href="{% url 'login_r'%}">  התחבר</a></li>
         {% endif %}
       </ul>
     </div>
@@ -62,8 +62,8 @@
         p {text-align: right;}
         div {text-align: right;}
          </style>
-      <h1 class="logoname"><a href="/home"><span>Easy</span>Shop</a></h1></br>
-      <h2 class="logoname"><a href="/home"><span>Buy</span>Online!</a></h2>
+      <h1 class="logoname"><a href="{% url 'home' %}"><span>Easy</span>Shop</a></h1></br>
+      <h2 class="logoname"><a href="{% url 'home' %}"><span>Buy</span>Online!</a></h2>
     </div>
     <div class="one_half">
       <ul class="nospace clear">
@@ -80,53 +80,57 @@
   </header>
 
 
-<div class="wrapper bgded overlay" style="background-image:url('static/images/demo/backgrounds/back.png');">
+<div class="mainav" style="background-color:#555353">
 
   <footer id="footer" class="hoc clear">
 
     <!-- ################################################################################################ -->
       {% csrf_token %}
     <div class="sectiontitle">
-      <font size="9" color="orange">הירשם כבעל עסק</font><br>
-      <font size="5" color="white">וקבל חנות אינטרנטית</font><br>
+     <b> <font size="9" color="#e9a00e">הירשם כבעל עסק</font></b></br>
+     <b> <font size="5" color="#e9a00e">וקבל חנות אינטרנטית</font></b></br>
 
-
-      <form  action="Business" method="post">
+         {% if user.is_authenticated %}
+      <style>
+        h1 { color:white;}
+      </style>
+        <h1>את/ה כבר מחובר/ת </h1>
+        <h1>את/ה כבר מחובר/ת בשביל להירשם  עלייך להתנתק ולחזור לעמוד זה</h1>
+        <footer><a class="btn" href="{% url 'logout' %}">התנתק</a>
+        {% else %}
+      <form  action="{% url 'business_register' %}" method="post" novalidate>
+        <style>
+        label {
+          color: white;
+          padding: 8px;
+          }
+          span {
+          color: white;
+          padding: 8px;
+          }
+          select {color: white;
+          padding: 8px;
+          background-color:#0e74a5;
+          width: 100%;
+          text-align: center;
+          }
+          textarea {
+          color: white;
+          padding: 8px;
+          background-color:#0e74a5;
+          width: 100%;
+          }
+          ::marker {
+            color:red;
+            background-color:red;
+            text-color:red;
+}
+    li { color:red;}
+        </style>
         {% csrf_token %}
-        <fieldset>
-          <legend>Custmer Register:</legend>
-            <style>
-                ::placeholder {color:white;}
-            </style>
-
-          <p class="btmspace+30">*:כתובת דואר אלקטרוני</p>
-          <input class="btmspace" type="email" name="email" placeholder="Email">
-          <p class="btmspace+30">*:שם מלא</p>
-          <input class="btmspace-15"  type="text" name="full_name" placeholder="Full name">
-          <!--<p class="btmspace+30">*שם משתמש</p>-->
-          <!--<input class="btmspace-15" type="text" name="username" placeholder="Username">-->
-          <!--<p class="btmspace+30">*:כתובת דואר אלקטרוני</p>-->
-          <!--<input class="btmspace" type="email" name="Email" placeholder="Email">
-          <p class="btmspace+30">*:מספר פלאפון</p>
-            <input class="btmspace" type="number" name="Phone" placeholder="Phone Number">-->
-          <p class="btmspace+30">*:סיסמה</p>
-            <input class="btmspace" type="password" name="password1" placeholder="Password">
-          <p class="btmspace+30">*:אישור סיסמה</p>
-            <input class="btmspace" type="password" name="password2" placeholder="Confirm Password">
-          <p class="btmspace+30">*:כתובת</p>
-          <input class="btmspace-15"  type="text" name="address" placeholder="address">
-          <p class="btmspace+30">*:פלאפון</p>
-          <input class="btmspace-15"  type="text" name="phone" placeholder="Phone">
-          <p class="btmspace+30">*:קטגוריה</p>
-          <input class="btmspace-15"  type="text" name="Category" placeholder="Category">
-          <p class="btmspace+30">*:שם עסק</p>
-          <input class="btmspace-15"  type="text" name="BusinessName" placeholder="BusinessName">
-          <style>
-            div {text-align: center;}
-          </style>
+        {{form}}
           <footer><button class="btn" type="submit">הירשם</button></footer>
-
-          </fieldset>
+          {% endif %}
       </form>
   </div>
     <!-- ################################################################################################ -->
@@ -134,5 +138,25 @@
 
     </div>
   </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+  <div id="copyright" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2020 - By Project#10 - SCE-"Software Engineering Department Year B." </p>
+    <p class="fl_right">Developed by <a target="_blank" href="/abut" title="Project#10 ">2020_21_project#group_10 </a></p>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="../layout/scripts/jquery.min.js"></script>
+<script src="../layout/scripts/jquery.backtotop.js"></script>
+<script src="../layout/scripts/jquery.mobilemenu.js"></script>
 </body>
 </html>

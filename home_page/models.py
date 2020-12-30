@@ -1,17 +1,11 @@
 from django.db import models
+from account.models import User
 
 
-# Create your models here.
-class users_Easy(models.Model):
-    name = models.CharField(max_length=100)
-    lastName = models.CharField(max_length=100)
-    nickName = models.CharField(max_length=20)
-    password = models.CharField(max_length=18)
-
-
-class Super(models.Model):
-    name = models.CharField(max_length=100)
-    lastName = models.CharField(max_length=100)
-    nickName = models.CharField(max_length=20)
-    password = models.CharField(max_length=18)
+class feedbackBox(models.Model):
+    name = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    feedback_subject = models.CharField(max_length=50)
+    feedback_info = models.TextField(max_length=255)
+    def __str__(self):
+        return 'feedback_subject: {}'.format(self.feedback_subject)
 

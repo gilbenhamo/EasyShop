@@ -32,7 +32,10 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "EasyShop",
     "home_page",
-    "acc",
+    "account",
+    "products",
+    "review",
+    "cart",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-AUTH_USER_MODEL = 'acc.baseUser'  # change the build-in user model to ours
+AUTH_USER_MODEL = 'account.User'  # change the build-in user model to ours
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -77,11 +80,10 @@ WSGI_APPLICATION = 'EasyShop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'defult',
+        'NAME': 'check-2',
         'USER': 'postgres',
-        'PASSWORD': '052052',
+        'PASSWORD': '1234',
         'HOST': 'localhost',
-
     }
 }
 
@@ -108,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Israel'
 
 USE_I18N = True
 
@@ -120,6 +122,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_DIRS = [
 

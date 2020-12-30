@@ -1,78 +1,8 @@
+{% extends 'TopBase.html' %}
+<!--hey i am hungary-->
 {% load static %}
-<!DOCTYPE html>
-<!--
-Template Name: Surogou
-Author: <a href="https://www.os-templates.com/">OS Templates</a>
-Author URI: https://www.os-templates.com/
-Copyright: OS-Templates.com
-Licence: Free to use under our free template licence terms
-Licence URI: https://www.os-templates.com/template-terms
--->
-<html lang="">
-<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
-<head>
-<title>Easy_Shop</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
-</head>
-<body id="top">
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper row0">
-  <div id="topbar" class="hoc clear">
-    <!-- ################################################################################################ -->
-    <div class="fl_left">
-      <ul class="nospace">
-        <li><a href="/home"><i class="fas fa-home fa-lg"></i></a></li>
-        <li><a href="/abut">אודות</a></li>
-        <li><a href="#">צור קשר</a></li>
-        {% if user.is_authenticated %}
-          {% if user.is_staff %}
-          <li>hello, {{user.username}}</li>
-          {% else %}
-          <li>hello, {{user.first_name}}</li>
-          {% endif %}
-          <li><a href="acc/logout">התנתק</a></li>
-        {% else %}
-        <li><a href="/Registar">הירשם</a></li>
-        <li><a href="acc/login">התחבר</a></li>
-        {% endif %}
-      </ul>
-    </div>
-    <div class="fl_right">
-      <ul class="nospace">
-        <li><i class="fas fa-phone rgtspace-5"></i> +972 (050) 959 1553</li>
-        <li><i class="fas fa-envelope rgtspace-5"></i> EasyShop@gmail.il</li>
-      </ul>
-    </div>
-    <!-- ################################################################################################ -->
-  </div>
-</div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper row1">
 
-  <header id="header" class="hoc clear">
-    <!-- ################################################################################################ -->
-    <div id="logo" class="one_half first">
-      <h1 class="logoname"><a href="/home"><span>Easy</span>Shop</a></h1></br>
-      <h2 class="logoname"><a href="/home"><span>Buy</span>Online!</a></h2>
-    </div>
-    <div class="one_half">
-      <ul class="nospace clear">
-        <li class="one_half first">
-          <div class="block clear"><i class="fas fa-phone"></i> <span><strong class="block">Call Ziv:</strong> +972 (050) 959 1553</span> </div>
-        </li>
-        <li class="one_half">
-          <div class="block clear"><i class="far fa-clock"></i> <span><strong class="block"> Mon. - Sat.:</strong> 24/7</span> </div>
-        </li>
-      </ul>
-    </div>
-    <!-- ################################################################################################ -->
-  </header>
+{% block content %}
 
   <nav id="mainav" class="hoc clear">
     <!-- ################################################################################################ -->
@@ -234,3 +164,24 @@ div {text-align: center;}
     <!-- ################################################################################################ -->
   </div>
 </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+  <div id="copyright" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2020 - By Project#10 - SCE-"Software Engineering Department Year B." </p>
+    <p class="fl_right">Developed by <a target="_blank" href="/abut" title="Project#10 ">2020_21_project#group_10 </a></p>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="../layout/scripts/jquery.min.js"></script>
+<script src="../layout/scripts/jquery.backtotop.js"></script>
+<script src="../layout/scripts/jquery.mobilemenu.js"></script>
+{% endblock %}
