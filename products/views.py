@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
 from .models import *
-
+from django.contrib import messages
 
 
 def create_product(request):
@@ -23,6 +23,7 @@ def create_product(request):
                 instance = form.save(commit=False)
                 instance.shop_id = request.user
                 instance.save()
+                messages.info(request, "המוצר נוסף בהצלחה")
             return redirect('/account/business_profile/{0}/'.format(request.user.id))
 
         context = {'form': form}

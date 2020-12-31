@@ -71,10 +71,11 @@
     <!-- ################################################################################################ -->
     <ul style="text-align:center">
       <font size="4">
+        {% include 'messages.html' %}
       {% if user.id == get_user.id %}
       <b><li ><a class="fas fa-plus" style="color:#0e74a5" href="{% url 'create_product' %}">     :הוסף מוצר   </a></li>
-      <li><a class="fas fa-book" style="color:#0e74a5" href="#">    :הזמנות</a></li>
-      <li><a class="fas fa-history" style="color:#0e74a5" href="">   :היסטורית הזמנות</a></li></b>
+      <li><a class="fas fa-book" style="color:#0e74a5" href="/cart/show_orders/{{get_user.id}}">    :הזמנות</a></li>
+      <li><a class="fas fa-history" style="color:#0e74a5" href="/cart/history_orders/{{get_user.id}}">   :היסטורית הזמנות</a></li></b>
         {% else %}
         <li><a style="color:#0e74a5" class="fas fa-shopping-cart" href="/cart/{{get_user.id}}/">          עבור לעגלת חנות</a></li>
         {% endif %}
@@ -93,24 +94,7 @@
     <!-- ################################################################################################ -->
     <div class="sidebar one_quarter first"   style="background-color:#0e74a5">
       <!-- ################################################################################################ -->
-        {% if user.id == get_user.id %}
-      <h5>הפרופיל שלי</h5>
 
-      <nav class="sdb_holder">
-        <ul>
-          <li><a href="#">הזמנות שלי</a>
-            <ul>
-              <li><a href="#">החנות שלי</a></li>
-              <li><a href="#">עריכת החנות שלי</a></li>
-            </ul>
-          </li>
-          <li><a href="#">הזמנות שלי</a>
-            <ul>
-              <li><a href="#">הזמנות מוכנות</a></li>
-              <li><a href="#">הסטורית הזמנות</a>
-
-      </nav>
-               {% endif %}
       <div class="sdb_holder" style="background-color:#3183ad">
         <h5><b><u>:פרטי העסק</u></b></h5>
          {% if user.is_superuser %}
@@ -173,6 +157,7 @@
     <!-- main body -->
     <!-- ################################################################################################ -->
 
+
     <div class="sectiontitle">
       <br>
       <b><font size="7" color="#0e74a5">המוצרים שלי</font><br></b>
@@ -215,9 +200,19 @@
          <font size="4"  <td><a class="fas fa-edit" href="/admin/products/product/{{prod.id}}/change/">ערכית מוצר עסק כמנהל</a></td></font>
           {% endif %}
             {% if user.is_customer %}
-            <a href="{% url 'add_to_cart' prod.id %}" class="btn btn-primary btn-md my-0 p">
-              Add to cart
-              <i class="fas fa-shopping-cart ml-1"></i>
+        
+            <form style="float:left; margin:5px" action="{% url 'add_to_cart' prod.id %}" method="post" enctype="multipart/form-data" novalidate>
+              {% csrf_token %}
+              <button class="btn" type="submit">הוסף לעגלה
+              <i class="fas fa-shopping-cart"></i></button>
+            </form>
+
+            <form style="margin:19px" action="{% url 'remove_from_cart' prod.id %}"   method="post" enctype="multipart/form-data" novalidate>
+              {% csrf_token %}
+              <button class="btn" type="submit">הסר מהעגלה
+              <i class="far fa-trash-alt"></i></button>
+            </form>
+
             </a>
             {% endif %}
             <br>

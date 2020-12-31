@@ -42,6 +42,12 @@ def searchByCategory(request,categ):
 # def AddProduct(request):
 #         return render(request,'AddProduct.html')
 
+def search(request):
+    shops = Business.objects.all()
+    if request.method == 'POST':
+        name = request.POST.get('s')
+        print(name)
+    return render(request,'search.html',{'shops':shops,'name':name})
 
 def adminReports(request):
     business = Business.objects.all()

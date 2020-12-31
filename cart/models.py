@@ -2,36 +2,50 @@ from django.db import models
 from account.models import Business, Customer, User
 from products.models import product
 from simple_history.models import HistoricalRecords
+from django.utils import timezone
 
 
 # Create your models here.
 
 
 class OrderItem(models.Model):
-    product = models.OneToOneField(product, on_delete=models.SET_NULL, null=True)
-    date_added = models.DateTimeField(auto_now=True)
-    quantity = models.IntegerField(default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    ordered = models.BooleanField(default = False)
+    product = models.ForeignKey(product, on_delete = models.SET_NULL, null = True)
+    date_added = models.DateTimeField(auto_now = True)
+    quantity = models.IntegerField(default = 1)
 
     def __str__(self):
         return self.product.product_name
 
+    
+
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
-    business_owner = models.ForeignKey(User,related_name='%(class)s_buisness', on_delete=models.CASCADE, default=None)
+    business_owner = models.ForeignKey(User, related_name='%(class)s_buisness', on_delete=models.CASCADE, default=None)
     products = models.ManyToManyField(OrderItem)
     status = models.BooleanField(default=False)
     order_type = models.BooleanField(default=False)
     customer_ready = models.BooleanField(default=False)
+    order_comments = models.CharField(max_length=255, default="no additional comments")
+    # order_date = models.DateTimeField(auto_now=True)
 
     def get_cart_items(self):
         return self.products.all()
+    
+    def get_order_date(self):
+        
+        prods = self.products.all()
+        if len(prods):
+            return prods[0].date_added
+        return timezone.now()
 
     def get_cart_total(self):
-        return sum([prod.product.product_price for prod in self.products.all()])
+        return sum([prod.product.product_price*prod.quantity for prod in self.products.all()])
 
     def __str__(self):
-        return '{0} - {1}'.format(self.status, self.user)
+        return 'Business-->{0} - User--> {1}'.format(self.business_owner, self.user)
 
     def is_ready(self):
         return self.status
@@ -41,3 +55,5 @@ class Order(models.Model):
 
     def is_customer_ready(self):
         return self.customer_ready
+
+

@@ -5,7 +5,6 @@
 
 
 
-
   <nav id="mainav" class="hoc clear">
     <!-- ################################################################################################ -->
     <ul class="clear">
@@ -16,6 +15,9 @@
           <li><a   href="{% url 'searchByCategory' cat %}">{{cat}}</a></li> <!--if press, send to this address (pages/gallery.html)-->
           {% endfor %}
         </ul>
+        <div>
+
+        </div>
       </li>
 
       <li><a class="drop" href="#">מידע</a>
@@ -31,23 +33,8 @@
           <li><a href="#">צוות התכנות של האתר</a></li>
         </ul>
       </li>
-<li><a href="{% url 'home' %}"><i class="fa-search fa-fw fas"></i></a></li>
 
 
-<!--      <li><a href="#">חנויות פופלוריות</a></li>-->
-<!--            <li><input class="btn-warning" type="button" value="חיפוש חנות" style="position: absolute;-->
-<!--    right: -30px;-->
-<!--    left: 195px;-->
-<!--    bottom: -40px;-->
-<!--color:black;"></li>-->
-      <li><input class="center" type="text" placeholder="חיפוש"  style="
-    position: absolute;
-    right: 50%;
-    left: 50%;
-    bottom: -40px;
-    color:black;
-    background-color:#fffff
-"></li>
 
       <!--<li><a href="#">Link Text</a></li>-->
       <!--<li><a href="#">Long Link Text</a></li>-->

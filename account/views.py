@@ -21,6 +21,7 @@ class customer_register(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
+        messages.info(self.request, " משתמש מסוג צרכן נוצר בהצלחה ברוך הבאה לאתר ")
         return redirect('home')
 
 
@@ -32,6 +33,7 @@ class business_register(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
+        messages.info(self.request, "משתמש מסוג בעל עסק נוצר בהצלחה ברוך הבאה לאתר")
         return redirect('home')
 
 
@@ -46,9 +48,9 @@ def login_r(request):
                 login(request, user)
                 return redirect('home')
             else:
-                messages.error(request, "Invalid username or password")
+                messages.info(request, "שם המתמש או הסיסמה לא נכונים")
         else:
-            messages.error(request, "Invalid username or password")
+            messages.info(request, "שם המתמש או הסיסמה לא נכונים")
     return render(request, 'login.html')
 
 

@@ -46,15 +46,33 @@ Licence URI: https://www.os-templates.com/template-terms
         <li><a class="far fa-gem" href="admin/">  עבור לדף ניהול אתר</a></li>
         <li><a class="far fa-list-alt" href="{% url 'admin_reports' %}" target="_blank">    דוח משתמשים</a></li>
         {% endif %}
+        {% if user.is_customer %}
+        <li><a class="far fa-gem" href="{% url 'home' %}">הזמנות מוכנות</a></li>
+        {% endif %}
+
 
       </ul>
     </div>
     <div class="fl_right">
       <ul class="nospace">
-        <li><i class="fas fa-phone rgtspace-5"></i> +972 (050) 959 1553</li>
+        <li style "width: 25px;"><form  method="post" style="" action="{% url 'search' %}">
+        {% csrf_token %}
+        <input type="text" style=" color:black; background-color:white;line-height: 20px;" placeholder="חפש לפי שם העסק" name="s"></li>
+        <button style="float:left;line-height: 20px;color:black;background-color:#white; " type="submit"><i class="fa fa-search"></i></button>
+        </form>
         <li><i class="fas fa-envelope rgtspace-5"></i> EasyShop@gmail.il</li>
       </ul>
     </div>
+    {% comment %} change the style of the placeholder {% endcomment %}
+    <style>
+    ::placeholder {
+          font-weight: bold;
+          color: black;
+          font-size: 1.2em;
+          text-align:right
+      }
+    </style>
+
     <!-- ################################################################################################ -->
   </div>
 </div>
@@ -66,6 +84,7 @@ Licence URI: https://www.os-templates.com/template-terms
   <header id="header" class="hoc clear"> 
     <!-- ################################################################################################ -->
     <div id="logo" class="one_half first">
+
       <h1 class="logoname"><a href="{% url 'home' %}"><span>Easy</span>Shop</a></h1></br>
       <h2 class="logoname"><a href="{% url 'home' %}"><span>Buy</span>Online!</a></h2>
     </div>
@@ -77,26 +96,26 @@ Licence URI: https://www.os-templates.com/template-terms
         <li class="one_half">
           <div class="block clear"><i class="far fa-clock"></i> <span><strong class="block"> Mon. - Sat.:</strong> 24/7</span> </div>
         </li>
+
       </ul>
+
     </div>
     <!-- ################################################################################################ -->
   </header>
+  <div><h1 style="color:red;text-align:center">{% include 'messages.html' %}</h1> </div>
   <div style="font-size: 12pt;
-font-weight: bold;
-color:red;
-background-repeat: no-repeat;
-background-position: 0 0;">
+              font-weight: bold;
+              color:red;
+              background-repeat: no-repeat;
+              background-position: 0 0;">
     {% for mas in massage %}
      הודעה מהנהלת האתר:{{mas.super_Massage}}<br>
     {% endfor %}
+
     {% if user.is_superuser %}
     <footer><a class="btn" href="{% url 'update_Category' %}">עריכת קטגוריה</a> <a class="btn" href="/admin/account/supermassage/add/">הוספת הודעת הנהלה</a> <a class="btn" href="/admin/account/supermassage/">עריכת הודעות/מחיקת הודעות</a>
-
-
     {% endif %}
-
-
-</div>
+  </div>
 
 {% block content %}
 

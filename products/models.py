@@ -10,7 +10,7 @@ class product(models.Model):
     product_name = models.CharField(max_length=50)
     product_info = models.TextField(max_length=255)
     product_price = models.IntegerField()
-    product_amount = models.CharField(max_length=50)
+    product_amount = models.IntegerField()
     product_image = models.ImageField(null=True, blank=True, upload_to="static/images/products_Pictures")
 
     def __str__(self):

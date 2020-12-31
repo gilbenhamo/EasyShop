@@ -4,7 +4,7 @@ from .models import comments
 from account.models import Business, Customer
 from review.form import RateForm
 from django.shortcuts import render, redirect
-
+from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 
 
@@ -31,6 +31,7 @@ def commentt(request,busi_id):
             comment.user = user
             comment.business_comments = business
             comment.save()
+            messages.info(request, "נוספה ביקורת לחנות תודה רבה על שיתוף הפעולה")
         return redirect('/review/{0}/'.format(business.user_id))
     context = {'reviews': form,'revs':revs,'busin':business,'avgrate':avg}
     return render(request, 'reviews.html', context)
