@@ -82,7 +82,10 @@ def show_cart(request, busi_id):
     }
     if request.method == 'POST':
         user = request.user
-        order = Order.objects.filter(user=user, business_owner=busi_id, customer_ready=False).update(customer_ready=True, order_comments = request.POST.get('comment'))
+        o_t = True if request.POST.get('take_away')=="on" else False
+        order = Order.objects.filter(user=user, business_owner=busi_id, customer_ready=False).update(customer_ready=True, order_comments = request.POST.get('comment'), order_type = o_t )
+        
+        #update the new amount of each product in the business
         for orde in existing_order.get_cart_items():
             element = product.objects.get(id = orde.product_id)
             OrderItem.objects.filter(user = user).update(ordered = True)
@@ -103,6 +106,14 @@ def show_cart(request, busi_id):
 def show_orders(request, busi_id):
     orders = Order.objects.all()
     context = {'orders':orders, 'business':busi_id}
+    if request.method == 'POST':
+        user = request.user
+        #get the order id by the id
+        id = request.POST.get('order_id')
+        a=Order.objects.get(id=id) #update the status to ready
+        a.status = True
+        a.save()
+        return redirect('/cart/show_orders/{0}/'.format(busi_id))
     return render(request, 'showOrders.html', context)
 
 def history_orders(request, busi_id):

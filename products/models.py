@@ -14,7 +14,7 @@ class product(models.Model):
     product_image = models.ImageField(null=True, blank=True, upload_to="static/images/products_Pictures")
 
     def __str__(self):
-        return 'user: {0}-->product_name{1}'.format(self.shop_id,self.product_name)
+        return 'user: {0}-->product_name: {1}'.format(self.shop_id,self.product_name)
     # category = models.CharField(max_length=50) optional
 
     # def get_add_to_cart_url(self):

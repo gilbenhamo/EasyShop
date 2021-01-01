@@ -6,7 +6,7 @@
 
     <!-- Title -->
     <div class="sectiontitle">
-      <font size="7" color="#0e74a5"><b>הזמנות פתוחות</b></font>
+      <font size="7" color="#0e74a5"><b>היסטורית הזמנות</b></font>
     </div>
 
     <!-- Costumize -->
@@ -22,7 +22,7 @@
     </style>
 
 <body>
-    <h1 style="text-align:center;font-family:cursive;"> <b><u>:פירוט מוצרים בהזמנה</u></b> </h1>
+    <h1 style="text-align:center;font-family:cursive;"> <b><u>:פירוט הזמנות</u></b> </h1>
     <!-- Tables -->
     {% for order in orders %} 
     {% if order.status == True and order.customer_ready %}
@@ -44,9 +44,11 @@
     </table>
     {% if order.order_comments != "" %}
         <table>
-           <tr>
-             <td>{{order.order_comments}} <b><u>:הערות הזמנה</u></b></td>
-            </tr>
+            {% if order.order_type%}
+            <td><b><u>הערות הזמנה</u></b>: {{order.order_comments}} <br> <b><u>סוג משלוח</b></u>: איסוף ע"י הלקוח </td>
+            {% else %}
+            <td><b><u>הערות הזמנה</u></b>: {{order.order_comments}} <br> <b><u>סוג משלוח</b></u>: משלוח לבית הלקוח </td>
+            {% endif %}
         </table>
     {% endif %}
     <table>

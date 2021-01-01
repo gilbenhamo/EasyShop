@@ -77,9 +77,9 @@
       <li><a class="fas fa-book" style="color:#0e74a5" href="/cart/show_orders/{{get_user.id}}">    :הזמנות</a></li>
       <li><a class="fas fa-history" style="color:#0e74a5" href="/cart/history_orders/{{get_user.id}}">   :היסטורית הזמנות</a></li></b>
         {% else %}
-        <li><a style="color:#0e74a5" class="fas fa-shopping-cart" href="/cart/{{get_user.id}}/">          עבור לעגלת חנות</a></li>
+        <li><a style="color:#0e74a5" class="fas fa-shopping-cart" href="/cart/{{get_user.id}}/">          עבור לעגלת החנות</a></li>
         {% endif %}
-        <li><a style="color:#0e74a5" class="fas fa-comments" href="/review/{{get_user.id}}/">          ביקורות חנות</a></li>
+      <li><a style="color:#0e74a5" class="fas fa-comments" href="/review/{{get_user.id}}/">          ביקורות החנות</a></li>
       </font>
     </ul>
     <!-- ################################################################################################ -->
@@ -164,23 +164,25 @@
       <p></p>
     </div>
                   <style>
-        p {text-align: right;}
+        p {text-align: right;font-size:16px}
         h6 {text-align: right;}
         h5 {text-align: center;}
         .row3 {
            color: black;
             background-color: #FFFFFF;
               }
-.overlay {
-    color: #FFFFFF;
-    background-color: inherit;
-    text-align: right;
-}
-.btn, .btn.inverse:hover {
-    color: #FFFFFF;
-    background-color: #F7A804;
-    border-color: #F7A804;
-}
+        .overlay {
+            color: #FFFFFF;
+            background-color: inherit;
+            text-align: right;
+        }
+        .btn, .btn.inverse:hover {
+            color: #FFFFFF;
+            background-color: #F7A804;
+            border-color: #F7A804;
+        }
+
+
          </style>
     <ul class="nospace" >
     {% for prod in prods %}
@@ -188,11 +190,10 @@
       <li class="one_third" >
         <figure>
           <figcaption>
-            <h6 class="heading" ><a href="#"><img src="{{prod.product_image.url}}" alt="" style="float:left;width:100px;height:100px;"></a> {{prod.product_name}} :שם המוצר       </h6>
-
-            <p>{{prod.product_info}} :פרטי המוצר</p>
-            <p> {{prod.product_amount}} :כמות במלאי</p>
-           <p>  מחיר: {{prod.product_price}} ש"ח</p>
+            <h6 class="heading" ><a href="#"><img src="{{prod.product_image.url}}" alt="" style="float:left;width:100px;height:100px;"></a><u><b>שם המוצר</u></b>: {{prod.product_name}}</h6>
+            <p> <u><b> פרטי המוצר</b></u>: {{prod.product_info}}</p>
+            <p> {{prod.product_amount}} :<u><b>כמות במלאי</u></b></p>
+            <p>  <u><b>מחיר</u></b>: {{prod.product_price}} ש"ח</p></b>
             {% if user.id == get_user.id %}
             <font size="4"  <td><a class="fas fa-edit" href="{% url 'update_product' prod.id %}">  :עריכת מוצר</a></td> </font>
             {% endif %}
@@ -207,7 +208,7 @@
               <i class="fas fa-shopping-cart"></i></button>
             </form>
 
-            <form style="margin:19px" action="{% url 'remove_from_cart' prod.id %}"   method="post" enctype="multipart/form-data" novalidate>
+            <form style="margin:21px" action="{% url 'remove_from_cart' prod.id %}"   method="post" enctype="multipart/form-data" novalidate>
               {% csrf_token %}
               <button class="btn" type="submit">הסר מהעגלה
               <i class="far fa-trash-alt"></i></button>

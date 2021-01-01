@@ -45,7 +45,7 @@ class Order(models.Model):
         return sum([prod.product.product_price*prod.quantity for prod in self.products.all()])
 
     def __str__(self):
-        return 'Business-->{0} - User--> {1}'.format(self.business_owner, self.user)
+        return 'Business:{0} --> Customer: {1}'.format(self.business_owner, self.user)
 
     def is_ready(self):
         return self.status

@@ -17,9 +17,9 @@ CATEGORY_BUSINESS=[]
 categs = Categories.get_all_categories()
 index=1
 #in case of new DB delete this for and then do makemigrations and migrate afther run server you can return this
-# for categ in categs:
-#     CATEGORY_BUSINESS.append((index,categ.category_name))
-#     index+=1
+for categ in categs:
+    CATEGORY_BUSINESS.append((index,categ.category_name))
+    index+=1
 
 print(CATEGORY_BUSINESS)
 

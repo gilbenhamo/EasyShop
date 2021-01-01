@@ -26,6 +26,7 @@
     <!-- Tables -->
     {% for order in orders %} 
     {% if order.status != True and order.customer_ready %}
+    <form  action="" method="post" enctype="multipart/form-data" novalidate>
     <table class='content-table'>
     <tr>
         <th>תאריך הזמנה</th>
@@ -45,7 +46,11 @@
     {% if order.order_comments != "" %}
         <table>
            <tr>
-             <td>{{order.order_comments}} <b><u>:הערות הזמנה</u></b></td>
+            {% if order.order_type%}
+            <td><b><u>הערות הזמנה</u></b>: {{order.order_comments}} <br> <b><u>סוג משלוח</b></u>: איסוף ע"י הלקוח </td>
+            {% else %}
+            <td><b><u>הערות הזמנה</u></b>: {{order.order_comments}} <br> <b><u>סוג משלוח</b></u>: משלוח לבית הלקוח </td>
+            {% endif %}
             </tr>
         </table>
     {% endif %}
@@ -67,7 +72,10 @@
             <td>₪<b><u>סה"כ לתשלום:</u></b> {{order.get_cart_total}}</td>
         </tr>
     </table>
-
+    {% csrf_token %}
+    <input type="hidden" name = "order_id" value = "{{order.id}}" >
+    <button class="btn" type="submit">הזמנה מוכנה</button>
+    </form>
         {% endif %}
     </table>
     <hr/>
