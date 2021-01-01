@@ -94,14 +94,6 @@ def show_cart(request, busi_id):
         return redirect('/account/business_profile/{0}/'.format(busi_id))
     return render(request, 'cart.html', context)
 
-# def ready_customer_orders(request,busi_id):
-#     if request.method == 'POST':
-#         user = request.user
-#         order_ready = Order.objects.filter(user=user,status=True)
-#         print(order_ready)
-#         order_not_ready = Order.objects.filter(user=user, status=False)
-#         context = {'order_ready': order_ready, 'order_not_ready': order_not_ready}
-#     return render(request, 'customer_orders.html', context)
 
 def show_orders(request, busi_id):
     orders = Order.objects.all()
@@ -110,9 +102,9 @@ def show_orders(request, busi_id):
         user = request.user
         #get the order id by the id
         id = request.POST.get('order_id')
-        a=Order.objects.get(id=id) #update the status to ready
-        a.status = True
-        a.save()
+        req_order=Order.objects.get(id=id) #update the status to ready
+        req_order.status = True
+        req_order.save()
         return redirect('/cart/show_orders/{0}/'.format(busi_id))
     return render(request, 'showOrders.html', context)
 
@@ -120,3 +112,11 @@ def history_orders(request, busi_id):
     orders = Order.objects.filter(business_owner=busi_id, status=True)
     context = {'orders':orders, 'business':busi_id}
     return render(request, 'history_orders.html', context)
+
+def customer_orders(request):
+    orders = Order.objects.filter(user = request.user)
+    context = {'orders':orders}
+    return render(request, 'customer_orders.html', context)
+
+def business_report(request):
+    return render(request, 'business_report.html')

@@ -12,6 +12,7 @@ from django.contrib.auth.models import auth
 from .models import Business
 from products.models import product
 from review.views import commentt
+from cart.models import Order
 
 class customer_register(CreateView):
     model = User
@@ -133,3 +134,8 @@ def update_Category(request):
 
     context = {'category': CATEGORY_BUSINESS}
     return render(request,'updateCategory.html',context)
+
+def sales_report(request):
+    orders = Order.objects.filter(business_owner_id=request.user.id, status=True,customer_ready=True)
+    context = {'orders': orders}
+    return render(request,'business_sales_report.html',context)

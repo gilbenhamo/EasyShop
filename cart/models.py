@@ -56,4 +56,8 @@ class Order(models.Model):
     def is_customer_ready(self):
         return self.customer_ready
 
+    def get_busi_name(self):
+        b=Business.objects.get(user_id=self.business_owner)
+        return b.business_name
+
 

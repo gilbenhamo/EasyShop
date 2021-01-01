@@ -33,10 +33,24 @@
     </div>
     <div class="fl_right">
       <ul class="nospace">
-        <li><i class="fas fa-phone rgtspace-5"></i> +972 (050) 959 1553</li>
-        <li><i class="fas fa-envelope rgtspace-5"></i> EasyShop@gmail.il</li>
+        <li style "width: 25px;"><form  method="post" style="" action="{% url 'search' %}">
+        {% csrf_token %}
+        <input type="text" style=" color:black; background-color:white;line-height: 20px;" placeholder="חפש לפי שם העסק" name="s"></li>
+        <button style="float:left;line-height: 20px;color:black;background-color:#white; " type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        {% if user.is_customer %}
+        <li><a class="far fa-calendar-check" href="{% url 'customer_orders' %}"> הזמנות שלי</a></li>
+        {% endif %}
       </ul>
     </div>
+    <style>
+    ::placeholder {
+          font-weight: bold;
+          color: black;
+          font-size: 1.2em;
+          text-align:right
+      }
+    </style>
     <!-- ################################################################################################ -->
   </div>
 </div>
@@ -75,11 +89,13 @@
       {% if user.id == get_user.id %}
       <b><li ><a class="fas fa-plus" style="color:#0e74a5" href="{% url 'create_product' %}">     :הוסף מוצר   </a></li>
       <li><a class="fas fa-book" style="color:#0e74a5" href="/cart/show_orders/{{get_user.id}}">    :הזמנות</a></li>
-      <li><a class="fas fa-history" style="color:#0e74a5" href="/cart/history_orders/{{get_user.id}}">   :היסטורית הזמנות</a></li></b>
+      <li><a class="fas fa-history" style="color:#0e74a5" href="/cart/history_orders/{{get_user.id}}">   :היסטורית הזמנות</a></li>
+      <li><a style="color:#0e74a5" class=" fas fa-chart-line" href="{% url 'business_report' %}">          דוחות</a></li>
         {% else %}
         <li><a style="color:#0e74a5" class="fas fa-shopping-cart" href="/cart/{{get_user.id}}/">          עבור לעגלת החנות</a></li>
         {% endif %}
       <li><a style="color:#0e74a5" class="fas fa-comments" href="/review/{{get_user.id}}/">          ביקורות החנות</a></li>
+      </b>
       </font>
     </ul>
     <!-- ################################################################################################ -->
