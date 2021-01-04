@@ -46,19 +46,3 @@ def update_product(request, pk_test):
     context = {'form': form}
     return render(request, 'updeateProduct.html', context)
 
-
-def createOrder(request,pk):
-    OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=10)
-    customer = Customer.objects.get(user_id=pk)
-    formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
-    # form = OrderForm(initial={'customer':customer})
-    if request.method == 'POST':
-        # print('Printing POST:', request.POST)
-        # form = OrderForm(request.POST)
-        formset = OrderFormSet(request.POST, instance=customer)
-        if formset.is_valid():
-            formset.save()
-            return redirect('/')
-
-    context = {'form': formset}
-    return render(request, 'order_form.html', context)

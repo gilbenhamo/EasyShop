@@ -5,7 +5,7 @@
 <html lang="en">
 
 <head>
-<title>Profile Business</title>
+<title>{{get_business.business_name}}</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
@@ -23,11 +23,17 @@
         <li><a class="far fa-handshake" href="/abut">  אודות</a></li>
         <li><a class="far fa-comments" href="{% url 'feedback' %}">  שלח משוב</a></li>
         {% if user.is_authenticated %}
-          <li>שלום, {{user.business.business_name}}</li>
+            {% if user.is_business %}
+                <li style="font-size: medium;">שלום, {{user.business.business_name}}</li>
+            {% elif user.is_customer %}
+                <li style="font-size: medium;">שלום, {{user.first_name}}</li>
+            {% else %}
+                <li style="font-size: medium;">שלום, אדמין</li>
+            {% endif %}
           <li><a class="far fa-times-circle" href="{% url 'logout' %}">  התנתק</a></li>
         {% else %}
         <li><a class="far fa-edit" href="/Registar">  הירשם</a></li>
-        <li><a class="far fa-user-circle" href="account/login_r">  התחבר</a></li>
+        <li><a class="far fa-user-circle" href="/account/login_r">  התחבר</a></li>
         {% endif %}
       </ul>
     </div>
@@ -50,6 +56,30 @@
           font-size: 1.2em;
           text-align:right
       }
+      .badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+#lblCartCount {
+    font-size: 12px;
+    background: #ff0000;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+}
+      .row0, .row0 a {
+    color: #FFFFFF;
+    background-color: #0E74A5;
+    font-size: medium;
+}
     </style>
     <!-- ################################################################################################ -->
   </div>
@@ -62,16 +92,16 @@
   <header id="header" class="hoc clear">
     <!-- ################################################################################################ -->
     <div id="logo" class="one_half first">
-      <h1 class="logoname"><a href="{% url 'home' %}"><span>Easy</span>Shop</a></h1></br>
-      <h2 class="logoname"><a href="{% url 'home' %}"><span>Buy</span>Online!</a></h2>
+      <a href="{% url 'home' %}">
+        <img src="\static\images\demo\logo.png"></a>
     </div>
     <div class="one_half">
       <ul class="nospace clear">
         <li class="one_half first">
-          <div class="block clear"><i class="fas fa-phone"></i> <span><strong class="block">Call Ziv:</strong> +972 (050) 959 1553</span> </div>
+          <div class="block clear"><i class="fas fa-phone"></i> <span><strong class="block">צור קשר</strong> +972 (050) 959 1553</span> </div>
         </li>
         <li class="one_half">
-          <div class="block clear"><i class="far fa-clock"></i> <span><strong class="block"> Mon. - Sat.:</strong> 24/7</span> </div>
+          <div class="block clear"><i class="far fa-clock"></i> <span><strong class="block"> ראשון - שישי</strong> 24/7</span> </div>
         </li>
       </ul>
     </div>
@@ -82,6 +112,7 @@
 <!-- ################################################################################################ -->
 <div class="wrapper bgded overlay" style="background-color:#0e74a5">
   <div id="topbar" class="clear" style="background-color:#e9a00e" >
+        {% if user.is_authenticated %}
     <!-- ################################################################################################ -->
     <ul style="text-align:center">
       <font size="4">
@@ -92,12 +123,19 @@
       <li><a class="fas fa-history" style="color:#0e74a5" href="/cart/history_orders/{{get_user.id}}">   :היסטורית הזמנות</a></li>
       <li><a style="color:#0e74a5" class=" fas fa-chart-line" href="{% url 'business_report' %}">          דוחות</a></li>
         {% else %}
-        <li><a style="color:#0e74a5" class="fas fa-shopping-cart" href="/cart/{{get_user.id}}/">          עבור לעגלת החנות</a></li>
+          {% if order.get_cart_amount %}
+        <li><a style="color:#0e74a5" href="/cart/{{get_user.id}}/" class="fas fa-shopping-cart" style="font-size: 25px"> עבור לעגלת החנות <asp:Label ID="lblCartCount" runat="server" CssClass="badge badge-warning"  ForeColor="White"/>{{order.get_cart_amount}}</a></li>
+          {% else %}
+                <li><a style="color:#0e74a5" href="/cart/{{get_user.id}}/" class="fas fa-shopping-cart" style="font-size: 25px"> עבור לעגלת החנות </a></li>
+          {% endif %}
         {% endif %}
       <li><a style="color:#0e74a5" class="fas fa-comments" href="/review/{{get_user.id}}/">          ביקורות החנות</a></li>
       </b>
       </font>
     </ul>
+    {% else %}
+    <h1 style="text-align:center">בשביל להתחיל לרכוש עלייך להתחבר למשתמש צרכן</h1>
+    {% endif %}
     <!-- ################################################################################################ -->
   </div>
 </div>

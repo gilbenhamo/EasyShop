@@ -10,15 +10,13 @@ from django.utils import timezone
 
 class OrderItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
-    ordered = models.BooleanField(default = False)
-    product = models.ForeignKey(product, on_delete = models.SET_NULL, null = True)
-    date_added = models.DateTimeField(auto_now = True)
-    quantity = models.IntegerField(default = 1)
+    ordered = models.BooleanField(default=False)
+    product = models.ForeignKey(product, on_delete=models.SET_NULL, null=True)
+    date_added = models.DateTimeField(auto_now=True)
+    quantity = models.IntegerField(default=1)
 
     def __str__(self):
         return self.product.product_name
-
-    
 
 
 class Order(models.Model):
@@ -29,20 +27,21 @@ class Order(models.Model):
     order_type = models.BooleanField(default=False)
     customer_ready = models.BooleanField(default=False)
     order_comments = models.CharField(max_length=255, default="no additional comments")
+
     # order_date = models.DateTimeField(auto_now=True)
 
     def get_cart_items(self):
         return self.products.all()
-    
+
     def get_order_date(self):
-        
+
         prods = self.products.all()
         if len(prods):
             return prods[0].date_added
         return timezone.now()
 
     def get_cart_total(self):
-        return sum([prod.product.product_price*prod.quantity for prod in self.products.all()])
+        return sum([prod.product.product_price * prod.quantity for prod in self.products.all()])
 
     def __str__(self):
         return 'Business:{0} --> Customer: {1}'.format(self.business_owner, self.user)
@@ -57,7 +56,8 @@ class Order(models.Model):
         return self.customer_ready
 
     def get_busi_name(self):
-        b=Business.objects.get(user_id=self.business_owner)
+        b = Business.objects.get(user_id=self.business_owner)
         return b.business_name
 
-
+    def get_cart_amount(self):
+        return sum([prod.quantity for prod in self.products.all()])

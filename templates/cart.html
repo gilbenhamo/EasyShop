@@ -1,17 +1,14 @@
 {% extends 'TopBase.html' %}
 
 {% block content %}
+<title>העגלה שלי</title>
       <div class="wrapper row3" >
   <main class="hoc clear" >
     <!-- main body -->
     <!-- ################################################################################################ -->
 
     <div class="sectiontitle">
-      <br>
       <b><font size="7" color="#0e74a5">העגלה שלי</font><br></b>
-      <br>
-
-      <p></p>
     </div>
                   <style>
         p {text-align: right;}
@@ -31,37 +28,21 @@
     background-color: #F7A804;
     border-color: #F7A804;
 }
-
-
-         </style>
-    <ul class="nospace">
-          </figcaption>
-          <br>
-        </figure>
-       </li>
-        <style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
 </style>
 <body>
-
-    <h1 style="text-align:center;font-family:cursive;"> העגלה שלי </h1>
         <h1 style="text-align:center;font-family:cursive;"> :פירוט מוצרים בהזמנה </h1>
 
 <table>
+        <style>
+        tr{
+
+            text-align: center;
+        }
+        }
+        th{
+            text-align: center;
+        }
+    </style>
   <tr>
     <th>מחיר ליחידה</th>
     <th>כמות</th>
@@ -125,7 +106,9 @@ tr:nth-child(even) {
       </br>
       <b>Take away?<input type="checkbox" name="take_away"></b>
       <br>
+          {% if order.get_cart_total > 0 %}
       <button class="btn" type="submit">סיום הזמנה</button>
+          {% endif %}
     </form>
     </div>
     </footer>
@@ -172,17 +155,5 @@ tr:nth-child(even) {
 {% endblock %}
 
 
-{% comment %}
-הופעת מצב ההזמנה בדף העגלה - נצטרך להעביר את זה להצגה בביזנס
-<footer style="text-align:center"><h1>:מצב הזמנה </h1></footer>
-    {% if order.status %}
-            <footer style="text-align:center;color:green"><h1>מוכן </h1></footer>
-    {%else%}
-    <footer style="text-align:center;color:red;"><h1>לא מוכן </h1></footer>
-    {%endif%}
-             <a href="{% url 'make_ready' order.id %}" class="btn btn-primary btn-md my-0 p">
-              הזמנה מוכנה
-              <i class="fas fa-shopping-cart ml-1"></i>
-            </a> {% endcomment %}
 
 

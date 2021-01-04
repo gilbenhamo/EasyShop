@@ -13,6 +13,7 @@ urlpatterns = [
     path('search/', views.search, name="search"),
     path('admin_reports', views.adminReports, name="admin_reports"),
     path('customer_orders/', customer_orders, name='customer_orders'),
+    path('guides/', views.guides, name='guides'),
     # path('send', views.send, name = 'send')
 
 ]

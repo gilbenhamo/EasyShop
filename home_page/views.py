@@ -44,13 +44,21 @@ def searchByCategory(request,categ):
 
 def search(request):
     shops = Business.objects.all()
+    context = {}
+    list = []
     if request.method == 'POST':
         name = request.POST.get('s')
-        print(name)
-    return render(request,'search.html',{'shops':shops,'name':name})
+        for shop in shops:
+            if name in shop.business_name:
+                list.append(shop)
+        context={'shops':shops,'name':name,'list':list}
+    return render(request,'search.html',context)
 
 def adminReports(request):
     business = Business.objects.all()
     customer = Customer.objects.all()
     context = {'business':business,'customer':customer}
     return render(request,'admin_reports.html',context)
+
+def guides(request):
+    return render(request,'guides.html')

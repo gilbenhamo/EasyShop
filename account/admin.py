@@ -4,6 +4,8 @@ from simple_history.admin import SimpleHistoryAdmin
 from django.contrib.admin.models import LogEntry,reverse
 from django.contrib.admin import AdminSite
 
+
+
 admin.site.register(User)
 admin.site.register(Customer)
 admin.site.register(Business)

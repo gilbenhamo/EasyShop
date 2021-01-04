@@ -13,20 +13,24 @@ Licence URI: https://www.os-templates.com/template-terms
 <html lang="">
 <!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
 <head>
-<title>Easy_Shop</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
 </head>
-<body id="top">
+<body id="top" >
+
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
-<div class="wrapper row0">
-  <div id="topbar" class="hoc clear"> 
+
+<div class="wrapper row0" >
+
+  <div id="topbar" class="hoc clear">
+
     <!-- ################################################################################################ -->
     <div class="fl_left">
       <ul class="nospace">
+
         <li><a href="{% url 'home' %}"><i class="fas fa-home fa-lg"></i></a></li>
         <li><a class="far fa-handshake" href="/abut">  אודות</a></li>
         <li><a class="far fa-comments" href="{% url 'feedback' %}">  שלח משוב</a></li>
@@ -36,7 +40,13 @@ Licence URI: https://www.os-templates.com/template-terms
           {% if user.is_business %}
          <li><a class="far fa-id-card" href="/account/business_profile/{{user.id}}/">  עבור לדף העסק</a></li>
           {% endif %}
-          <li>שלום, {{user.username}}</li>
+            {% if user.is_business %}
+                <li style="font-size: medium;">שלום, {{user.business.business_name}}</li>
+            {% elif user.is_customer %}
+                <li style="font-size: medium;">שלום, {{user.first_name}}</li>
+            {% else %}
+                <li style="font-size: medium;">שלום, אדמין</li>
+            {% endif %}
           <li><a class="far fa-times-circle" href="/account/logout">   התנתק</a></li>
         {% else %}
         <li><a class="far fa-edit" href="/Registar">  הירשם</a></li>
@@ -71,10 +81,22 @@ Licence URI: https://www.os-templates.com/template-terms
           font-size: 1.2em;
           text-align:right
       }
+      .row0, .row0 a {
+    color: #FFFFFF;
+    background-color: #0E74A5;
+    font-size: medium;
+}
     </style>
 
     <!-- ################################################################################################ -->
   </div>
+
+
+<div>
+  {% for mas in massage %}
+<section class="notice" data-container="body" data-toggle="tooltip" data-placement="bottom" data-original-title="Manage_Massages"><div id="notice_marquee"><marquee><span class="notice">הודעת מנהל: {{mas.super_Massage}} </span></marquee></div></section>
+  {% endfor %}
+</div>
 </div>
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
@@ -83,18 +105,17 @@ Licence URI: https://www.os-templates.com/template-terms
 
   <header id="header" class="hoc clear"> 
     <!-- ################################################################################################ -->
-    <div id="logo" class="one_half first">
-
-      <h1 class="logoname"><a href="{% url 'home' %}"><span>Easy</span>Shop</a></h1></br>
-      <h2 class="logoname"><a href="{% url 'home' %}"><span>Buy</span>Online!</a></h2>
+    <div id="logo" class="one_half first" >
+      <a href="{% url 'home' %}">
+        <img src="\static\images\demo\logo.png"></a>
     </div>
     <div class="one_half">
       <ul class="nospace clear">
         <li class="one_half first">
-          <div class="block clear"><i class="fas fa-phone"></i> <span><strong class="block">Call Us:</strong> +972 (050) 959 1553</span> </div>
+          <div class="block clear"><i class="fas fa-phone"></i> <span><strong class="block">צור קשר</strong> +972 (050) 959 1553</span> </div>
         </li>
         <li class="one_half">
-          <div class="block clear"><i class="far fa-clock"></i> <span><strong class="block"> Mon. - Sat.:</strong> 24/7</span> </div>
+          <div class="block clear"><i class="far fa-clock"></i> <span><strong class="block"> ראשון - שישי</strong> 24/7</span> </div>
         </li>
 
       </ul>
@@ -108,9 +129,6 @@ Licence URI: https://www.os-templates.com/template-terms
               color:red;
               background-repeat: no-repeat;
               background-position: 0 0;">
-    {% for mas in massage %}
-     הודעה מהנהלת האתר:{{mas.super_Massage}}<br>
-    {% endfor %}
 
     {% if user.is_superuser %}
     <footer><a class="btn" href="{% url 'update_Category' %}">עריכת קטגוריה</a> <a class="btn" href="/admin/account/supermassage/add/">הוספת הודעת הנהלה</a> <a class="btn" href="/admin/account/supermassage/">עריכת הודעות/מחיקת הודעות</a>

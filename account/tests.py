@@ -1,3 +1,2 @@
-from django.test import TestCase
-
-# Create your tests here.
+from django.test import TestCase, Client, SimpleTestCase
+from django.urls import reverse, resolve

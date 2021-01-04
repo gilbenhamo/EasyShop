@@ -50,8 +50,6 @@ class Business(models.Model):
         return self.business_name
 
 
-User.add_to_class('Business', models.ManyToManyField('self', symmetrical=False))
-
 
 class Categories(models.Model):
     category_name = models.CharField(max_length=25)

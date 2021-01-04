@@ -1,85 +1,8 @@
-{% load static %}
-<!DOCTYPE html>
+{% extends 'TopBase.html' %}
 
-<html lang="he">
+{% block content %}
 
-<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
-<head>
-<title>Easy_Shop</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
-</head>
-
-<body id="top" >
-
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper row0">
-  <div id="topbar" class="hoc clear">
-    <!-- ################################################################################################ -->
-    <div class="fl_left">
-      <ul class="nospace">
-        <li><a href="{% url 'home' %}"><i class="fas fa-home fa-lg"></i></a></li>
-        <li><a class="far fa-handshake" href="/abut">  אודות</a></li>
-        <li><a class="far fa-comments" href="{% url 'feedback' %}">  שלח משוב</a></li>
-        {% if user.is_authenticated %}
-          {% if user.is_staff %}
-          <li>hello, {{user.username}}</li>
-          {% else %}
-          <li>hello, {{user.first_name}}</li>
-          {% endif %}
-          <li><a class="far fa-times-circle" href="logout">   התנתק</a></li>
-        {% else %}
-        <li><a class="far fa-edit" href="/Registar">  הירשם</a></li>
-        <li><a class="far fa-user-circle" href="{% url 'login_r'%}">  התחבר</a></li>
-        {% endif %}
-      </ul>
-    </div>
-    <div class="fl_right">
-      <ul class="nospace">
-        <li><i class="fas fa-phone rgtspace-5"></i> +972 (050) 959 1553</li>
-        <li><i class="fas fa-envelope rgtspace-5"></i> EasyShop@gmail.il</li>
-      </ul>
-    </div>
-    <!-- ################################################################################################ -->
-  </div>
-</div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-  <div class="wrapper row1">
-
-  <header id="header" class="clear" style="background-color:#555353">
-
-    <!-- ################################################################################################ -->
-    <div id="logo" class="one_half first">
-          <style>
-        h1 {text-align: center;}
-        h2 {text-align: center;}
-        h5 {text-align: center;}
-        p {text-align: right;}
-        div {text-align: right;}
-         </style>
-      <h1 class="logoname"><a href="{% url 'home' %}"><span>Easy</span>Shop</a></h1></br>
-      <h2 class="logoname"><a href="{% url 'home' %}"><span>Buy</span>Online!</a></h2>
-    </div>
-    <div class="one_half">
-      <ul class="nospace clear">
-        <li class="one_half first">
-
-        </li>
-        <li class="one_half">
-
-        </li>
-      </ul>
-    </div>
-    <!-- ################################################################################################ -->
-
-  </header>
-
-
+<title>הירשם כבעל עסק</title>
 <div class="mainav" style="background-color:#555353">
 
   <footer id="footer" class="hoc clear">
@@ -105,7 +28,7 @@
           padding: 8px;
           }
           span {
-          color: white;
+          color: black;
           padding: 8px;
           }
           select {color: white;
@@ -125,7 +48,10 @@
             background-color:red;
             text-color:red;
 }
-    li { color:red;}
+    li { color:white;}
+    #header ul li div i {
+    color: black;
+}
         </style>
         {% csrf_token %}
         {{form}}
@@ -160,3 +86,4 @@
 <script src="../layout/scripts/jquery.mobilemenu.js"></script>
 </body>
 </html>
+{% endblock %}
