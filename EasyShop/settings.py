@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'EasyShop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'EashShopPresent',
-        'USER': os.getenv('POSTGRESS_USER', 'postgres'),
-        'PASSWORD': os.getenv('POSTGRESS_PASSWORD', '052052'),
-        'HOST': os.getenv('POSTGRESS_HOST', 'localhost'),
+        'NAME': os.getenv('POSTGRES_NAME', 'EashShopPresent'),
+        'USER': os.getenv('POSTGRES_USER', 'postgres'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', '052052'),
+        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
     }
 }
 
