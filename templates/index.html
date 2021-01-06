@@ -3,7 +3,13 @@
 
 {% block content %}
 <title>דף הבית</title>
-
+<style>
+  #mainav li li a, #mainav .active li a {
+    color: #FFFFFF;
+    background-color: burlywood;
+    border-color: rgba(0,0,0,.6);
+}
+</style>
 
   <nav style="width:400px;" id="mainav" class="hoc clear">
     <!-- ################################################################################################ -->
@@ -12,7 +18,7 @@
       <li><a class="drop" href="#">|קטגוריות|</a>
         <ul>
           {% for cat in category %}
-          <li><a   href="{% url 'searchByCategory' cat %}">{{cat}}</a></li> <!--if press, send to this address (pages/gallery.html)-->
+          <li><a style="text-align: right;"  href="{% url 'searchByCategory' cat %}">{{cat}}</a></li> <!--if press, send to this address (pages/gallery.html)-->
           {% endfor %}
         </ul>
         <li class="active"><a href="{% url 'guides' %}">|מדריכים|</a></li>

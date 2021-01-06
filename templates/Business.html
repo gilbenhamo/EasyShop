@@ -13,7 +13,7 @@
      <b> <font size="9" color="#e9a00e">הירשם כבעל עסק</font></b></br>
      <b> <font size="5" color="#e9a00e">וקבל חנות אינטרנטית</font></b></br>
 
-         {% if user.is_authenticated %}
+      {% if user.is_authenticated %}
       <style>
         h1 { color:white;}
       </style>
@@ -47,16 +47,16 @@
             color:red;
             background-color:red;
             text-color:red;
-}
-    li { color:white;}
-    #header ul li div i {
-    color: black;
-}
+          }
+                li { color:white;}
+                #header ul li div i {
+                color: black;
+          }
         </style>
         {% csrf_token %}
         {{form}}
           <footer><button class="btn" type="submit">הירשם</button></footer>
-          {% endif %}
+      {% endif %}
       </form>
   </div>
     <!-- ################################################################################################ -->

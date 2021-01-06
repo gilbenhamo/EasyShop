@@ -1,20 +1,9 @@
-from django.shortcuts import render
-from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
-from django.utils import timezone
-from django.views.generic import ListView, DetailView, View
 from .models import Order, OrderItem
 from products.models import product
-from account.models import Customer
 from account.models import Business
-from django.urls import reverse
-from account.models import User
-from .form import createOrderComment
 
 
 def get_user_pending_order(request, busi_id):
@@ -29,27 +18,28 @@ def get_user_pending_order(request, busi_id):
 
 def add_to_cart(request, **kwargs):
     user = request.user
-    products = get_object_or_404(product, id=kwargs.get('item_id', ""))
+    products = get_object_or_404(product, id=kwargs.get('item_id', ""))  # Get a unique product ID in the store
     order_item, status = OrderItem.objects.get_or_create(product_id=kwargs.get('item_id', ""), user=user, ordered=False)
     user_order = Order.objects.filter(user=user, business_owner=products.shop_id, customer_ready=False)
-    if (products.product_amount > 0):
+    if (products.product_amount > 0):  # Checks that the product is in stock
         if user_order.exists():
             order = user_order[0]
             # Add amount to order item
             if order.products.filter(product_id=products.id).exists():
-                if order_item.quantity < products.product_amount:
+                if order_item.quantity < products.product_amount:  # Make sure the consumer does not order more than
+                    # the existing stock
                     order_item.quantity += 1
                     order_item.save()
                     messages.info(request, "המוצר נוסף לעגלה")
                 else:
                     messages.info(request, "אין אפשרות להוסיף עוד כל המלאי הקיים בעגלה שלך")
             else:
-                order.products.add(order_item)
+                order.products.add(order_item)  # Adds to a product that is in the cart
                 messages.info(request, "המוצר נוסף לעגלה")
 
         else:
             order = Order.objects.create(business_owner=products.shop_id, user=user)
-            order.products.add(order_item)
+            order.products.add(order_item)  # Adds a new product to the cart
             messages.info(request, "המוצר נוסף לעגלה")
     else:
         messages.info(request, "המוצר לא זמין במלאי")
@@ -58,26 +48,25 @@ def add_to_cart(request, **kwargs):
 
 def remove_from_cart(request, **kwargs):
     user = request.user
-    products = get_object_or_404(product, id=kwargs.get('item_id', ""))
+    products = get_object_or_404(product, id=kwargs.get('item_id', ""))  # Get a unique product ID in the store
     user_order = Order.objects.filter(user=user, business_owner=products.shop_id, customer_ready=False)
     if user_order.exists():
         order = user_order[0]
         # Remove
         if order.products.filter(product_id=products.id).exists():
             order_item = OrderItem.objects.filter(product_id=kwargs.get('item_id', ""), user=user, ordered=False)[0]
-            if order_item.quantity > 1:
+            if order_item.quantity > 1:  # If there is more than 1 quantity of the product then remove 1
                 order_item.quantity -= 1
                 order_item.save()
                 messages.info(request, "המוצר הוסר מהעגלה")
             else:
-                order.products.remove(order_item)
+                order.products.remove(order_item)  # If there is only product 1 then delete it completely from the cart
                 messages.info(request, "המוצר הוסר מהעגלה")
-        else:
-            # Add a massage "user dont have any items in the cart"
+        else:  # Message that a product that does not exist in the cart cannot be downloaded
             messages.info(request, "אין אפשרות להוריד מוצר שלא קיים בעגלה")
             return redirect('/account/business_profile/{0}/'.format(products.shop_id_id))
     else:
-        # Add a massage "There is no order"
+        messages.info(request, "אין הזמנה קיימת")
         return redirect('/account/business_profile/{0}/'.format(products.shop_id_id))
     return redirect('/account/business_profile/{0}/'.format(products.shop_id_id))
 

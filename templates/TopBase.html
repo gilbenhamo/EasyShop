@@ -50,7 +50,7 @@ Licence URI: https://www.os-templates.com/template-terms
           <li><a class="far fa-times-circle" href="/account/logout">   התנתק</a></li>
         {% else %}
         <li><a class="far fa-edit" href="/Registar">  הירשם</a></li>
-        <li><a class="far fa-user-circle" href="account/login_r">  התחבר</a></li>
+        <li><a class="far fa-user-circle" href="/account/login_r">  התחבר</a></li>
         {% endif %}
         {% if user.is_superuser %}
         <li><a class="far fa-gem" href="admin/">  עבור לדף ניהול אתר</a></li>
@@ -63,7 +63,8 @@ Licence URI: https://www.os-templates.com/template-terms
     </div>
     <div class="fl_right">
       <ul class="nospace">
-        <li style "width: 25px;"><form  method="post" style="" action="{% url 'search' %}">
+        <li style "width: 25px;">
+        <form  method="post" style="" action="{% url 'search' %}">
         {% csrf_token %}
         <input type="text" style=" color:black; background-color:white;line-height: 20px;" placeholder="חפש לפי שם העסק" name="s"></li>
         <button style="float:left;line-height: 20px;color:black;background-color:#white; " type="submit"><i class="fa fa-search"></i></button>

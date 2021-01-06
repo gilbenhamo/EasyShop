@@ -1,15 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import product
 from .form import createProduct
-from django.views.generic import CreateView
-from account.models import User, Business
-from django import forms
-from django.forms import ModelForm
-from django.contrib.auth.models import Permission
-# from .decorators import allowed_users
-from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse
-from django.forms import inlineformset_factory
 from .models import *
 from django.contrib import messages
 

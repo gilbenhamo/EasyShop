@@ -149,20 +149,20 @@
     <div class="sidebar one_quarter first"   style="background-color:#0e74a5">
       <!-- ################################################################################################ -->
 
-      <div class="sdb_holder" style="background-color:#3183ad">
+      <div class="sdb_holder" style="background-color:#3183ad;text-align: right;">
         <h5><b><u>:פרטי העסק</u></b></h5>
          {% if user.is_superuser %}
           <font size="5" <td><a class="fas fa-edit" href="/admin/account/business/{{get_business.user_id}}/change/">ערכית פרופיל  העסק כמנהל</a></td></font>
           {% endif %}
         <address>
-        First Name:{{get_user.first_name}}<br>
-        last Name:{{get_user.last_name}}<br>
-        business Name:{{get_business.business_name}}<br>
-        Address: {{get_business.business_address}}<br>
+        <b> שם : </b> {{get_user.first_name}}<br>
+        <b>שם משפחה :   </b>{{get_user.last_name}}<br>
+       <b>שם העסק : </b>{{get_business.business_name}}<br>
+        <b>כתובת העסק :  </b>{{get_business.business_address}}<br>
         <!--business phone: {{user.business.business_phone}}<br>-->
         <br>
-        Tel: {{get_business.business_phone}}<br>
-        Email: <a href="#">{{get_user.email}}</a><br>
+        <b>טלפון העסק : </b>{{get_business.business_phone}}<br>
+         <a href="#">{{get_user.email}}</a><b>: אימייל העסק </b><br>
           <br>
           <br>
           {% if user.id == get_user.id %}
@@ -214,10 +214,16 @@
 
     <div class="sectiontitle">
       <br>
+       {% if user.id == get_user.id %}
       <b><font size="7" color="#0e74a5">המוצרים שלי</font><br></b>
       <p></p>
+        {% else %}
+      <b><font size="7" color="#0e74a5">מוצרי החנות</font><br></b>
+      <p></p>
+      {% endif %}
     </div>
-                  <style>
+
+        <style>
         p {text-align: right;font-size:16px}
         h6 {text-align: right;}
         h5 {text-align: center;}
@@ -237,7 +243,7 @@
         }
 
 
-         </style>
+        </style>
     <ul class="nospace" >
     {% for prod in prods %}
       {% if get_user.id == prod.shop_id_id  %}

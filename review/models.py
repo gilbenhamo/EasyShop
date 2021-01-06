@@ -1,5 +1,5 @@
 from django.db import models
-from account.models import Business, Customer,User
+from account.models import Business, User
 from simple_history.models import HistoricalRecords
 RATE_CHOICES = [
     (1, '1 - very bad'),

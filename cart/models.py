@@ -1,11 +1,7 @@
 from django.db import models
-from account.models import Business, Customer, User
+from account.models import Business, User
 from products.models import product
-from simple_history.models import HistoricalRecords
 from django.utils import timezone
-
-
-# Create your models here.
 
 
 class OrderItem(models.Model):
@@ -28,13 +24,10 @@ class Order(models.Model):
     customer_ready = models.BooleanField(default=False)
     order_comments = models.CharField(max_length=255, default="no additional comments")
 
-    # order_date = models.DateTimeField(auto_now=True)
-
     def get_cart_items(self):
         return self.products.all()
 
     def get_order_date(self):
-
         prods = self.products.all()
         if len(prods):
             return prods[0].date_added

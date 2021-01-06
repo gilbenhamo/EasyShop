@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import permission_required
 
 from simple_history.models import HistoricalRecords
 
@@ -19,8 +17,6 @@ class User(AbstractUser):
     is_business = models.BooleanField(default=False)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-
-    # email = models.EmailField(max_length=255, unique=True)
 
 
 class Customer(models.Model):
@@ -50,7 +46,6 @@ class Business(models.Model):
         return self.business_name
 
 
-
 class Categories(models.Model):
     category_name = models.CharField(max_length=25)
 
@@ -60,5 +55,3 @@ class Categories(models.Model):
 
     def __str__(self):
         return self.category_name
-
-

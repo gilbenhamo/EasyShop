@@ -1,27 +1,25 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, authenticate
 from django.views.generic import CreateView
-from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-import psycopg2
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from .form import User, CustomerSignUpform, BusinessSignUpform, BusinessUpdeateForm, createMassage, createDeals, \
-    CATEGORY_BUSINESS, createCategories, Categories
+    CATEGORY_BUSINESS, Categories
 from django.contrib.auth.models import auth
 from .models import Business
 from products.models import product
 from review.views import commentt
-from cart.models import Order,OrderItem
+from cart.models import Order
 from cart.views import get_user_pending_order
+
 
 class customer_register(CreateView):
     model = User
     form_class = CustomerSignUpform
     template_name = 'custmer.html'
 
-    def form_valid(self, form):
+    def form_valid(self, form):  # If the registration was successful login automatically
         user = form.save()
         login(self.request, user)
         messages.info(self.request, " משתמש מסוג צרכן נוצר בהצלחה ברוך הבאה לאתר ")
@@ -33,7 +31,7 @@ class business_register(CreateView):
     form_class = BusinessSignUpform
     template_name = 'Business.html'
 
-    def form_valid(self, form):
+    def form_valid(self, form):  # If the registration was successful login automatically
         user = form.save()
         login(self.request, user)
         messages.info(self.request, "משתמש מסוג בעל עסק נוצר בהצלחה ברוך הבאה לאתר")
@@ -47,7 +45,7 @@ def login_r(request):
             username = request.POST['username']
             password = request.POST['password']
             user = authenticate(username=username, password=password)
-            if user is not None:
+            if user is not None:  # If the login was successful return to home page
                 login(request, user)
                 return redirect('home')
             else:
@@ -62,7 +60,7 @@ def logout(request):
     return redirect("home")
 
 
-def business_profile(request, pk_test):
+def business_profile(request, pk_test):  # pk_test Gets a unique Id of a business profile
     get_business = Business.objects.get(user_id=pk_test)
     get_user = User.objects.get(id=pk_test)
     prods = product.objects.all()
@@ -72,15 +70,13 @@ def business_profile(request, pk_test):
     else:
         existing_order = 0
     return render(request, "business_profile.html",
-                  {'prods': prods, 'get_business': get_business, 'get_user': get_user,'order':existing_order})
-
+                  {'prods': prods, 'get_business': get_business, 'get_user': get_user, 'order': existing_order})
 
 
 @login_required
-def update_business(request, pk_test):
+def update_business(request, pk_test): # pk_test Gets a unique Id of a business profile
     business = Business.objects.get(user_id=pk_test)
     check = int(pk_test)
-    print(check)
     form = BusinessUpdeateForm(instance=business, )
     if request.method == 'POST':
         form = BusinessUpdeateForm(request.POST, instance=business)
@@ -93,11 +89,10 @@ def update_business(request, pk_test):
     return render(request, 'updeateBusiness.html', context)
 
 
-def create_Massage(request, pk_test):
+def create_Massage(request, pk_test):  # pk_test Gets a unique Id of a business profile
     business = Business.objects.get(user_id=pk_test)
     form = createMassage(instance=business)
     check = int(pk_test)
-    print(check)
     if request.method == 'POST':
         form = createMassage(request.POST, instance=business)
         if form.is_valid():
@@ -109,11 +104,10 @@ def create_Massage(request, pk_test):
     return render(request, 'updeateMassage.html', context)
 
 
-def create_deals(request, pk_test):
+def create_deals(request, pk_test):  # pk_test Gets a unique Id of a business profile
     business = Business.objects.get(user_id=pk_test)
     form = createDeals(instance=business)
     check = int(pk_test)
-    print(check)
     if request.method == 'POST':
         form = createDeals(request.POST, instance=business)
         if form.is_valid():
