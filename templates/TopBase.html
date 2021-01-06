@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+{% load static %}
+
+
+<!--
+Template Name: Surogou
+Author: <a href="https://www.os-templates.com/">OS Templates</a>
+Author URI: https://www.os-templates.com/
+Copyright: OS-Templates.com
+Licence: Free to use under our free template licence terms
+Licence URI: https://www.os-templates.com/template-terms
+-->
+<html lang="">
+<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+</head>
+<body id="top" >
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+
+<div class="wrapper row0" >
+  <div id="topbar" class="hoc clear"> 
+    <!-- ################################################################################################ -->
+    <div class="fl_left">
+      <ul class="nospace">
+        <li><a href="{% url 'home' %}"><i class="fas fa-home fa-lg"></i></a></li>
+        <li><a class="far fa-handshake" href="/abut">  אודות</a></li>
+        <li><a class="far fa-comments" href="{% url 'feedback' %}">  שלח משוב</a></li>
+        {% if user.is_business %}
+        {% endif %}
+        {% if user.is_authenticated %}
+          {% if user.is_business %}
+         <li><a class="far fa-id-card" href="/account/business_profile/{{user.id}}/">  עבור לדף העסק</a></li>
+          {% endif %}
+            {% if user.is_business %}
+                <li style="font-size: medium;">שלום, {{user.business.business_name}}</li>
+            {% elif user.is_customer %}
+                <li style="font-size: medium;">שלום, {{user.first_name}}</li>
+            {% else %}
+                <li style="font-size: medium;">שלום, אדמין</li>
+            {% endif %}
+          <li><a class="far fa-times-circle" href="/account/logout">   התנתק</a></li>
+        {% else %}
+        <li><a class="far fa-edit" href="/Registar">  הירשם</a></li>
+        <li><a class="far fa-user-circle" href="account/login_r">  התחבר</a></li>
+        {% endif %}
+        {% if user.is_superuser %}
+        <li><a class="far fa-gem" href="admin/">  עבור לדף ניהול אתר</a></li>
+        <li><a class="far fa-list-alt" href="{% url 'admin_reports' %}" target="_blank">    דוח משתמשים</a></li>
+        {% endif %}
+
+
+
+      </ul>
+    </div>
+    <div class="fl_right">
+      <ul class="nospace">
+        <li style "width: 25px;"><form  method="post" style="" action="{% url 'search' %}">
+        {% csrf_token %}
+        <input type="text" style=" color:black; background-color:white;line-height: 20px;" placeholder="חפש לפי שם העסק" name="s"></li>
+        <button style="float:left;line-height: 20px;color:black;background-color:#white; " type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        {% if user.is_customer %}
+        <li><a class="far fa-calendar-check" href="{% url 'customer_orders' %}"> הזמנות שלי </a></li>
+        {% endif %}
+      </ul>
+    </div>
+    {% comment %} change the style of the placeholder {% endcomment %}
+    <style>
+    ::placeholder {
+          font-weight: bold;
+          color: black;
+          font-size: 1.2em;
+          text-align:right
+      }
+      .row0, .row0 a {
+    color: #FFFFFF;
+    background-color: #0E74A5;
+    font-size: medium;
+}
+    </style>
+
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row1">
+
+  <header id="header" class="hoc clear"> 
+    <!-- ################################################################################################ -->
+    <div id="logo" class="one_half first" >
+      <a href="{% url 'home' %}">
+        <img src="\static\images\demo\logo.png"></a>
+    </div>
+    <div class="one_half">
+      <ul class="nospace clear">
+        <li class="one_half first">
+          <div class="block clear"><i class="fas fa-phone"></i> <span><strong class="block">צור קשר</strong> +972 (050) 959 1553</span> </div>
+        </li>
+        <li class="one_half">
+          <div class="block clear"><i class="far fa-clock"></i> <span><strong class="block"> ראשון - שישי</strong> 24/7</span> </div>
+        </li>
+
+      </ul>
+
+    </div>
+    <!-- ################################################################################################ -->
+  </header>
+  <div><h1 style="color:red;text-align:center">{% include 'messages.html' %}</h1> </div>
+  <div style="font-size: 12pt;
+              font-weight: bold;
+              color:red;
+              background-repeat: no-repeat;
+              background-position: 0 0;">
+    {% for mas in massage %}
+     הודעה מהנהלת האתר:{{mas.super_Massage}}<br>
+    {% endfor %}
+
+    {% if user.is_superuser %}
+    <footer><a class="btn" href="{% url 'update_Category' %}">עריכת קטגוריה</a> <a class="btn" href="/admin/account/supermassage/add/">הוספת הודעת הנהלה</a> <a class="btn" href="/admin/account/supermassage/">עריכת הודעות/מחיקת הודעות</a>
+    {% endif %}
+  </div>
+
+{% block content %}
+
+{% endblock %}
+
+</body>
+</html>

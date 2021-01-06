@@ -1,0 +1,36 @@
+{%  extends 'TopBase.html' %}
+{% load static %}
+{% block content %}
+<title>הרשמה</title>
+<div class="wrapper bgded overlay" style="{% static "'background-image:url('images/demo/backgrounds/01.png');"%}">
+
+  <div id="pageintro" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <footer><a class="btn" href="{% url 'business_register' %}">הירשם כבעל חנות</a></footer>
+  <style>
+        h1 {text-align: center;}
+        p {text-align: center;}
+        div {text-align: center;}
+  </style>
+      <footer><a class="btn" href="{% url 'customer_register' %}">הירשם כצרכן</a></footer>
+    </div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+  <div id="copyright" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2020 - By Project#10 - SCE-"Software Engineering Department Year B." </p>
+    <p class="fl_right">Developed by <a target="_blank" href="/abut" title="Project#10 ">2020_21_project#group_10 </a></p>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="../layout/scripts/jquery.min.js"></script>
+<script src="../layout/scripts/jquery.backtotop.js"></script>
+<script src="../layout/scripts/jquery.mobilemenu.js"></script>
+{% endblock %}

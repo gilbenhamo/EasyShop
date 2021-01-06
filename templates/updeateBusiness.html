@@ -1,0 +1,209 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<title>עדכון פרטי העסק</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+</head>
+<body id="top">
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row0">
+  <div id="topbar" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <div class="fl_left">
+      <ul class="nospace">
+        <li><a href="{% url 'home' %}"><i class="fas fa-home fa-lg"></i></a></li>
+        <li><a class="far fa-handshake" href="/abut">  אודות</a></li>
+        <li><a class="far fa-comments" href="{% url 'feedback' %}">  שלח משוב</a></li>
+        {% if user.is_authenticated %}
+            {% if user.is_business %}
+                <li style="font-size: medium;">שלום, {{user.business.business_name}}</li>
+            {% elif user.is_customer %}
+                <li style="font-size: medium;">שלום, {{user.first_name}}</li>
+            {% else %}
+                <li style="font-size: medium;">שלום, אדמין</li>
+            {% endif %}
+          <li><a class="far fa-times-circle" href="{% url 'logout' %}">  התנתק</a></li>
+        {% else %}
+        <li><a class="far fa-edit" href="/Registar">  הירשם</a></li>
+        <li><a class="far fa-user-circle" href="/account/login_r">  התחבר</a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="fl_right">
+      <ul class="nospace">
+        <li style "width: 25px;"><form  method="post" style="" action="{% url 'search' %}">
+        {% csrf_token %}
+        <input type="text" style=" color:black; background-color:white;line-height: 20px;" placeholder="חפש לפי שם העסק" name="s"></li>
+        <button style="float:left;line-height: 20px;color:black;background-color:#white; " type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        {% if user.is_customer %}
+        <li><a class="far fa-calendar-check" href="{% url 'customer_orders' %}"> הזמנות שלי</a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <style>
+    ::placeholder {
+          font-weight: bold;
+          color: black;
+          font-size: 1.2em;
+          text-align:right
+      }
+      .badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+#lblCartCount {
+    font-size: 12px;
+    background: #ff0000;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+}
+      .row0, .row0 a {
+    color: #FFFFFF;
+    background-color: #0E74A5;
+    font-size: medium;
+}
+    </style>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row1">
+
+  <header id="header" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <div id="logo" class="one_half first">
+      <a href="{% url 'home' %}">
+        <img src="\static\images\demo\logo.png"></a>
+    </div>
+    <!-- ################################################################################################ -->
+  </header>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+  <div class="wrapper row1">
+
+  <header id="header" class="clear" style="background-color:#555353">
+
+    <!-- ################################################################################################ -->
+    <div id="logo" class="one_half first">
+          <style>
+        h1 {text-align: center;}
+        h2 {text-align: center;}
+        h5 {text-align: center;}
+        p {text-align: right;}
+        div {text-align: right;}
+              .row0, .row0 a {
+    color: #FFFFFF;
+    background-color: #0E74A5;
+    font-size: medium;
+}
+         </style>
+    </div>
+    <div class="one_half">
+      <ul class="nospace clear">
+        <li class="one_half first">
+
+        </li>
+        <li class="one_half">
+
+        </li>
+      </ul>
+    </div>
+    <!-- ################################################################################################ -->
+
+  </header>
+
+
+<div class="mainav" style="background-color:#555353">
+
+  <footer id="footer" class="hoc clear">
+
+    <!-- ################################################################################################ -->
+      {% csrf_token %}
+    <div class="sectiontitle">
+     <b> <font size="9" color="#e9a00e">עריכת פרטי עסק</font></b></br>
+
+
+      <form  action="" method="post" novalidate>
+        <style>
+        label {
+          color: white;
+          padding: 8px;
+          }
+          span {
+          color: white;
+          padding: 8px;
+          }
+          select {color: white;
+          padding: 8px;
+          background-color:#0e74a5;
+          width: 100%;
+          text-align: center;
+          }
+          textarea {
+          color: white;
+          padding: 8px;
+          background-color:#0e74a5;
+          width: 100%;
+          }
+        </style>
+        {% if user.id == check %}
+        {% csrf_token %}
+        {{form}}
+
+        <br>
+        <br>
+          <footer><button class="btn" type="submit">עדכון פרטי העסק</button></footer>
+        {% else %}
+         <footer><h1>רק בעל/ת החנות יכול/ה לערוך את פרטי העסק</h1></footer>
+        <footer><a class="btn" href="{% url 'home' %}">חזור לדף הבית</a>
+        {% endif %}
+      </form>
+  </div>
+    <!-- ################################################################################################ -->
+  </footer>
+
+    </div>
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+  <div id="copyright" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2020 - By Project#10 - SCE-"Software Engineering Department Year B." </p>
+    <p class="fl_right">Developed by <a target="_blank" href="/abut" title="Project#10 ">2020_21_project#group_10 </a></p>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="../layout/scripts/jquery.min.js"></script>
+<script src="../layout/scripts/jquery.backtotop.js"></script>
+<script src="../layout/scripts/jquery.mobilemenu.js"></script>
+</body>
+</html>

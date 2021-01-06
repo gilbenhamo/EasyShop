@@ -1,0 +1,66 @@
+{% extends 'TopBase.html' %}
+
+{% block content %}
+
+<title>הירשם כצרכן</title>
+<div class="wrapper bgded overlay" style="background-image:url('static/images/demo/backgrounds/back.png');">
+
+  <footer id="footer" class="hoc clear">
+
+    <!-- ################################################################################################ -->
+
+     <div class="sectiontitle">
+      <font size="9" color="orange">הירשם עכשיו כצרכן</font><br>
+      <font size="5" color="white">ותוכל עוד היום לקנות בצורה מקוונת</font></br>
+       </br>
+
+         {% if user.is_authenticated %}
+               <style>
+        h1 { color:white;}
+
+      </style>
+        <h1>את/ה כבר מחובר/ת </h1>
+        <h1>את/ה כבר מחובר/ת בשביל להירשם  עלייך להתנתק ולחזור לעמוד זה</h1>
+        <footer><a class="btn" href="{% url 'logout' %}">התנתק</a>
+        {% else %}
+      <form  action="{% url 'customer_register' %}" method="post" novalidate>
+        {% csrf_token %}
+        {{form}}
+      </br>
+        <button class="btn" type="submit">הירשם</button>
+      </form>
+          {% endif %}
+      <div>
+        {% for message in messages %}
+        <h3>{{message}}</h3>
+        {% endfor %}
+      </div>
+  </div>
+    <!-- ################################################################################################ -->
+  </footer>
+
+    </div>
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+  <div id="copyright" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2020 - By Project#10 - SCE-"Software Engineering Department Year B." </p>
+    <p class="fl_right">Developed by <a target="_blank" href="/abut" title="Project#10 ">2020_21_project#group_10 </a></p>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="../layout/scripts/jquery.min.js"></script>
+<script src="../layout/scripts/jquery.backtotop.js"></script>
+<script src="../layout/scripts/jquery.mobilemenu.js"></script>
+</body>
+</html>
+{% endblock %}

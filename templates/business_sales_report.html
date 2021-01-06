@@ -1,0 +1,55 @@
+{% extends 'TopBase.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>דוח מכירות</title>
+</head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+<body>
+
+<h1 style="text-align:center;font-family:cursive;"> :דוח מכירות </h1>
+
+<table>
+  <tr>
+    <th>תאריך</th>
+    <th>כמות</th>
+    <th>מוצרים</th>
+
+  </tr>
+    {% for o in orders %}
+        {% for item in o.get_cart_items %}
+       <tr>
+        <td>{{item.date_added}}</td>
+        <td>{{item.quantity}}</td>
+        <td>{{item}}</td>
+         </tr>
+        {% endfor %}
+    <th></th>
+    <th></th>
+    <th></th>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

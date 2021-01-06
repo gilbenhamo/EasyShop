@@ -1,0 +1,110 @@
+{% extends 'TopBase.html' %}
+
+{% block content %}
+<title>היסטורית הזמנה</title>
+<div class="wrapper row3" >
+  <main class="hoc clear" >
+
+    <!-- Title -->
+    <div class="sectiontitle">
+      <font size="7" color="#0e74a5"><b>היסטורית הזמנות</b></font>
+    </div>
+
+    <!-- Costumize -->
+    <style>
+        tr{
+
+            text-align: center;
+        }
+        }
+        th{
+            text-align: center;
+        }
+    </style>
+
+<body>
+    <h1 style="text-align:center;font-family:cursive;"> <b><u>:פירוט הזמנות</u></b> </h1>
+    <!-- Tables -->
+    {% for order in orders %} 
+    {% if order.status == True and order.customer_ready %}
+    <table class='content-table'>
+    <tr>
+        <th>תאריך הזמנה</th>
+        <th>דוא"ל</th>
+        <th>כתובת</th>
+        <th>טלפון</th>
+        <th>שם מלא</th>
+    </tr>
+    <tr>
+        <th>{{order.get_order_date}}</th>
+        <th>{{order.user.email}}</th>
+        <th>{{order.user.customer.address}}</th>
+        <th>{{order.user.customer.phone}}</th>
+        <th>{{order.user.first_name}} {{order.user.last_name}}</th>
+    </tr>
+    </table>
+    {% if order.order_comments != "" %}
+        <table>
+            {% if order.order_type%}
+            <td><b><u>הערות הזמנה</u></b>: {{order.order_comments}} <br> <b><u>סוג משלוח</b></u>: איסוף ע"י הלקוח </td>
+            {% else %}
+            <td><b><u>הערות הזמנה</u></b>: {{order.order_comments}} <br> <b><u>סוג משלוח</b></u>: משלוח לבית הלקוח </td>
+            {% endif %}
+        </table>
+    {% endif %}
+    <table>
+    <tr>
+        <th>מחיר</th>
+        <th>כמות</th>
+        <th>פריט</th>
+    </tr>
+        {% for item in order.get_cart_items %}
+    <tr>
+        <td>₪ {{item.product.product_price}}</td>
+        <td>{{item.quantity}}</td>
+        <td>{{item}}</td>
+    </tr>
+        {% endfor %}
+    <table>
+        <tr>
+            <td>₪<b><u>סה"כ לתשלום:</u></b> {{order.get_cart_total}}</td>
+        </tr>
+    </table>
+
+        {% endif %}
+    </table>
+    <hr/>
+    {% endfor %}
+
+    <!--<div class="wrapper bgded overlay" style="background-image:url('static/images/demo/backgrounds/back.png');"> This is for gray background--> 
+    <div>
+        <footer id="footer" class="hoc clear">
+            <footer style="text-align:center"><a class="btn"  href="/account/business_profile/{{business}}">חזרה לדף העסק</a></footer>
+            <br>
+        </footer>
+    </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+  <div id="copyright" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2020 - By Project#10 - SCE-"Software Engineering Department Year B." </p>
+    <p class="fl_right">Developed by <a target="_blank" href="/abut" title="Project#10 ">2020_21_project#group_10 </a></p>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+
+<!-- JAVASCRIPTS -->
+<script src="../layout/scripts/jquery.min.js"></script>
+<script src="../layout/scripts/jquery.backtotop.js"></script>
+<script src="../layout/scripts/jquery.mobilemenu.js"></script>
+</body>
+</html>
+{% endblock %}
+
