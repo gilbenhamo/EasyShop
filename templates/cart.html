@@ -1,0 +1,159 @@
+{% extends 'TopBase.html' %}
+
+{% block content %}
+<title>העגלה שלי</title>
+      <div class="wrapper row3" >
+  <main class="hoc clear" >
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+
+    <div class="sectiontitle">
+      <b><font size="7" color="#0e74a5">העגלה שלי</font><br></b>
+    </div>
+        <style>
+        p {text-align: right;}
+        h6 {text-align: right;}
+        h5 {text-align: center;}
+        .row3 {
+           color: black;
+            background-color: #FFFFFF;
+              }
+        .overlay {
+            color: #FFFFFF;
+            background-color: inherit;
+            text-align: right;
+        }
+        .btn, .btn.inverse:hover {
+            color: #FFFFFF;
+            background-color: #F7A804;
+            border-color: #F7A804;
+        }
+        </style>
+<body>
+        <h1 style="text-align:center;font-family:cursive;"> :פירוט מוצרים בהזמנה </h1>
+
+<table>
+        <style>
+        tr{
+
+            text-align: center;
+        }
+        }
+        th{
+            text-align: center;
+        }
+    </style>
+  <tr>
+    <th>מחיר ליחידה</th>
+    <th>כמות</th>
+    <th>שם מוצר</th>
+  </tr>
+    {% for item in order.get_cart_items %}
+  <tr>
+    <td>₪ {{item.product.product_price}}</td>
+    <td>{{item.quantity}}</td>
+    <td>{{item}}</td>
+  </tr>
+    {% endfor %}
+  <table>
+    <tr>
+      <td style = "text-align: center"><b>סה"כ לתשלום:</b> ₪{{order.get_cart_total}}</td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <td style = "text-align: center">{{order.get_order_date}} <b>:תאריך ביצוע הזמנה</b></td>
+    </tr>
+  </table>
+</table>
+      <footer id="footer" class="hoc clear">
+      <div class="sectiontitle">
+      </br>
+      <b><font size="6" color="#0e74a5">הערות להזמנה</font><br></b>
+
+      <div>
+      
+      <form  action="" method="post" enctype="multipart/form-data" novalidate>
+        <style>
+          select {color: white;
+          padding: 8px;
+          background-color:#0e74a5;
+          width: 100%;
+          text-align: center;
+          }
+          textarea {
+          color: white;
+          padding: 8px;
+          background-color:#0e74a5;
+          width: 100%;
+          }
+          ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: black;
+            opacity: 1; /* Firefox */
+          }
+
+          :-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: black;
+          }
+
+          ::-ms-input-placeholder { /* Microsoft Edge */
+            color: black;
+          }
+          
+        </style>
+      {% csrf_token %}
+      <input style = "text-slign: center; placeholder-color: black" type = "text" size = '80' placeholder="הכנס הערות" name="comment"/>
+      </br>
+      <b>Take away?<input type="checkbox" name="take_away"></b>
+      <br>
+          {% if order.get_cart_total > 0 %}
+      <button class="btn" type="submit">סיום הזמנה</button>
+          {% endif %}
+    </form>
+    </div>
+    </footer>
+  </div>
+
+      </ul>
+      </div>
+<div class="wrapper bgded overlay" style="background-image:url('static/images/demo/backgrounds/back.png');">
+
+  <footer id="footer" class="hoc clear">
+
+    <!-- ################################################################################################ -->
+  <footer style="text-align:center"><a class="btn"  href="/account/business_profile/{{get_business.user_id}}">חזרה לדף העסק</a></footer>
+      <br>
+
+    <!-- ################################################################################################ -->
+  </footer>
+
+    </div>
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+  <div id="copyright" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2020 - By Project#10 - SCE-"Software Engineering Department Year B." </p>
+    <p class="fl_right">Developed by <a target="_blank" href="/abut" title="Project#10 ">2020_21_project#group_10 </a></p>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+
+<!-- JAVASCRIPTS -->
+<script src="../layout/scripts/jquery.min.js"></script>
+<script src="../layout/scripts/jquery.backtotop.js"></script>
+<script src="../layout/scripts/jquery.mobilemenu.js"></script>
+</body>
+</html>
+{% endblock %}
+
+
+
+

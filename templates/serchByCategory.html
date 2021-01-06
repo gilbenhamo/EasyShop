@@ -1,0 +1,44 @@
+{% extends 'TopBase.html' %}
+{% load static %}
+
+{% block content %}
+<title>חיפוש לפי קטגוריה</title>
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+          <style>
+        .overview > li figure figcaption * {
+    margin: 0;
+    text-align: center;
+}
+      </style>
+
+    <div class="sectiontitle">
+      <h5  class="heading" style="color:#0e74a5;"> <font size="10"><b><u>{{categName}}</u></b></font></h5>
+
+    </div>
+
+    <ul class="nospace group overview">
+    {% for shop in shops %}
+      {% if shop.business_category == categ %}
+      <li class="one_third">
+        <figure><a href="/account/business_profile/{{shop.user_id}}/"><img src="{% static 'images/demo/shop1.jpeg' %}" alt=""></a>
+          <figcaption>
+            <h6 class="heading"> :שם חנות</h6>
+            <h6 class="heading"> {{shop.business_name}}</h6>
+            <p>:מידע על החנות</p>
+            <p> {{shop.business_info}}</p>
+          </figcaption>
+        </figure>
+      </li>
+      {% endif %}
+
+      {% endfor %}
+
+</body>
+</html>
+
+
+{% endblock %}

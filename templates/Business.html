@@ -1,0 +1,89 @@
+{% extends 'TopBase.html' %}
+
+{% block content %}
+
+<title>הירשם כבעל עסק</title>
+<div class="mainav" style="background-color:#555353">
+
+  <footer id="footer" class="hoc clear">
+
+    <!-- ################################################################################################ -->
+      {% csrf_token %}
+    <div class="sectiontitle">
+     <b> <font size="9" color="#e9a00e">הירשם כבעל עסק</font></b></br>
+     <b> <font size="5" color="#e9a00e">וקבל חנות אינטרנטית</font></b></br>
+
+      {% if user.is_authenticated %}
+      <style>
+        h1 { color:white;}
+      </style>
+        <h1>את/ה כבר מחובר/ת </h1>
+        <h1>את/ה כבר מחובר/ת בשביל להירשם  עלייך להתנתק ולחזור לעמוד זה</h1>
+        <footer><a class="btn" href="{% url 'logout' %}">התנתק</a>
+        {% else %}
+      <form  action="{% url 'business_register' %}" method="post" novalidate>
+        <style>
+        label {
+          color: white;
+          padding: 8px;
+          }
+          span {
+          color: black;
+          padding: 8px;
+          }
+          select {color: white;
+          padding: 8px;
+          background-color:#0e74a5;
+          width: 100%;
+          text-align: center;
+          }
+          textarea {
+          color: white;
+          padding: 8px;
+          background-color:#0e74a5;
+          width: 100%;
+          }
+          ::marker {
+            color:red;
+            background-color:red;
+            text-color:red;
+          }
+                li { color:white;}
+                #header ul li div i {
+                color: black;
+          }
+        </style>
+        {% csrf_token %}
+        {{form}}
+          <footer><button class="btn" type="submit">הירשם</button></footer>
+      {% endif %}
+      </form>
+  </div>
+    <!-- ################################################################################################ -->
+  </footer>
+
+    </div>
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+  <div id="copyright" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2020 - By Project#10 - SCE-"Software Engineering Department Year B." </p>
+    <p class="fl_right">Developed by <a target="_blank" href="/abut" title="Project#10 ">2020_21_project#group_10 </a></p>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="../layout/scripts/jquery.min.js"></script>
+<script src="../layout/scripts/jquery.backtotop.js"></script>
+<script src="../layout/scripts/jquery.mobilemenu.js"></script>
+</body>
+</html>
+{% endblock %}

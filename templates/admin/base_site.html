@@ -1,0 +1,76 @@
+{% extends 'admin/base.html' %} {%load static%} {% block branding %}
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+    color: #3183ad;
+    background: linear-gradient(45deg, black, transparent);
+  }
+  #header {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    background: #e9a00e;
+    color: #0e74a5;
+    overflow: hidden;
+    font-size:16px;
+  }
+  #header a:link, #header a:visited {
+    font-size:16px;
+    color: #0e74a5;
+    font-weight: bold;
+  }
+  #user-tools {
+    float: right;
+    padding: 0;
+    margin: 0 0 0 20px;
+    font-weight: 300;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-align: right;
+    font-weight: bold;
+  }
+  .module h2, .module caption, .inline-group h2 {
+    margin: 0;
+    padding: 8px;
+    font-weight: 400;
+    font-size: 13px;
+    text-align: left;
+    background: #e9a00e;
+    color: #0e74a5;
+  }
+  h1 {
+    margin: 0 0 20px;
+    font-weight: 300;
+    font-size: 28px;
+    background: #e9a00e;
+    color: #0e74a5;
+    text-align: center;
+  }
+  div.breadcrumbs {
+    background:black;
+    padding: 10px 40px;
+    border: none;
+    font-size: 14px;
+    color: #c4dce8;
+    text-align: left;
+  }
+</style>
+<div class="container">
+  <h1 id="head" style="color:black">
+    <img src="{% static 'images/demo/user.png' %}" width="50" height="45" />
+    Easy Shop administration
+  </h1>
+</div>
+
+{% endblock %} {% block extrastyle%}
+
+<link rel="stylesheet" href="{% static 'css/adminstyle.css'%}" />
+
+{%endblock %}

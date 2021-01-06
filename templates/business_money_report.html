@@ -1,0 +1,55 @@
+{% extends 'TopBase.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>דוח הכנסות</title>
+</head>
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+</style>
+<body>
+
+<h1 style="text-align:center;font-family:cursive;"> :דוח הכנסות </h1>
+
+<table>
+  <tr>
+    <th>סכום הזמנה</th>
+    <th>תאריך</th>
+    <th>שם המזמין</th>
+    <th>מספר חשבונית</th>
+  </tr>
+    {% for o in orders %}
+
+       <tr>
+        <td>₪{{o.get_cart_total}}</td>
+        <td>{{o.get_order_date}}</td>
+        <td>{{o.user.first_name}} {{o.user.last_name}}</td>
+        <td>{{o.id}}</td>
+         </tr>
+    {% endfor %}
+</table>
+<table>
+           <tr>
+            <td><b><u>סה"כ הכנסות:</u></b> ₪{{total}} </td>
+            </tr>
+</table>
+
+{% endblock %}

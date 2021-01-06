@@ -1,0 +1,75 @@
+{% extends 'TopBase.html' %}
+{% load static %}
+
+{% block content %}
+<title>חיפוש</title>
+
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+
+    <div class="sectiontitle">
+      <style>
+        .overview > li figure figcaption * {
+    margin: 0;
+    text-align: center;
+}
+      </style>
+
+    </div>
+    <ul class="nospace group overview">
+
+      {% for l in list %}
+      <li class="one_third">
+        <figure><a href="/account/business_profile/{{shop.user_id}}/"><img src="{% static 'images/demo/shop1.jpeg' %}" alt=""></a>
+          <figcaption>
+            <h6 class="heading"> :שם חנות</h6>
+            <h6 class="heading"> {{l.business_name}}</h6>
+            <p>:מידע על החנות</p>
+            <p> {{l.business_info}}</p>
+          </figcaption>
+        </figure>
+      </li>
+      {% endfor %}
+    </ul>
+      <br>
+      <div class="sectiontitle">
+        <ul class="nospace group overview">
+          <figure>
+        <h6>חפש שוב</h6>
+            <figcaption>
+    <form  method="post" style="" action="{% url 'search' %}">
+      {% csrf_token %}
+      <input type="text" style="
+    position: relative;
+    right: 67%;
+    left: 35%;
+    bottom: -23px;
+    color:black;
+    background-color:white;
+   
+    " placeholder="חפש לפי שם העסק" name="s">
+      <button style="
+
+    position: relative;
+    right: 67%;
+    left: 30%;
+    bottom: 0px;
+    color:black;
+    background-color:white;
+    
+
+
+    " type="submit"><i class="fa fa-search"></i></button>
+    </form>
+                </figcaption>
+        </figure>
+      </div>
+
+ 
+</body>
+</html>
+
+
+{% endblock %}

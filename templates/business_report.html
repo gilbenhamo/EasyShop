@@ -1,0 +1,27 @@
+{% extends 'TopBase.html' %}
+
+{% block content %}
+<title>דוחות עסק</title>
+{% if user.is_business %}
+  <div>
+   <font size="7"><a style="text-align: center;display: block;" class="fas fa-clipboard-list" href="{% url 'sales_report' %}"> דוח מכירות</a>
+    <br>
+    <br>
+  <a style="text-align: center;display: block;" class="fas fa-clipboard-list" href="{% url 'money_report' %}"> דוח הכנסות </a>
+    <br>
+    <br>
+  <a style="text-align: center;display: block;" class="fas fa-clipboard-list" href="{% url 'Inventory_report' %}"> דוח מלאי </a>
+  </font>
+    <br>
+    <br>
+  </div>
+{% else %}
+ <div class="sectiontitle">
+    <h1>רק משתמש בעל עסק יכול לגשת לדוחות</h1>
+</div>
+{% endif %}
+
+
+
+
+{% endblock %}

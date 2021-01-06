@@ -1,0 +1,69 @@
+{% extends 'TopBase.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>דוח מלאי</title>
+</head>
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+</style>
+<body>
+
+<h1 style="text-align:center;font-family:cursive;"> :דוח מלאי </h1>
+
+<table>
+  <tr>
+    <th>כמות במלאי</th>
+    <th>מוצר</th>
+
+
+  </tr>
+    {% for o in prods %}
+       <tr>
+           {% if o.product_amount < 10 %}
+           <td style="color:red">{{o.product_amount}}</td>
+           {% else %}
+        <td>{{o.product_amount}}</td>
+           {% endif %}
+       <td>{{o.product_name}}</td>
+         </tr>
+    {% endfor %}
+</table>
+<h1 style="text-align:center;font-family:cursive;"> כל המוצרים שהמלאי שלהם עומד להיגמר (כמות קטנה מ10) </h1>
+
+<table>
+  <tr>
+    <th>כמות במלאי</th>
+    <th>מוצר</th>
+
+
+  </tr>
+    {% for o in prods %}
+       <tr>
+           {% if o.product_amount < 10 %}
+           <td style="color:red">{{o.product_amount}}</td>
+           <td>{{o.product_name}}</td>
+           {% endif %}
+         </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

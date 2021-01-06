@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin_Reports</title>
+</head>
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+</style>
+<body>
+
+    <h1 style="text-align:center;font-family:cursive;"> User Reports: </h1>
+        <h1>Business users:</h1>
+<table>
+  <tr>
+    <th>שם משתמש</th>
+    <th>אימייל</th>
+    <th>תאריך הצטרפות</th>
+    <th>שם מלא</th>
+    <th>שם העסק</th>
+    <th>מספר פלאפון</th>
+    <th>קטגוריה</th>
+  </tr>
+    {% for b in business %}
+  <tr>
+    <td>{{b.user}}</td>
+    <td>{{b.user.email}}</td>
+    <td>{{b.user.date_joined}}</td>
+    <td>{{b.user.first_name}} {{b.user.last_name}}</td>
+    <td>{{b.business_name}}</td>
+    <td>{{b.business_phone}}</td>
+    <td>{{b.business_category}}</td>
+  </tr>
+    {% endfor %}
+
+</table>
+ <br>
+        <h1>Customer users:</h1>
+<table>
+  <tr>
+    <th>שם משתמש</th>
+    <th>אימייל</th>
+    <th>תאריך הצטרפות</th>
+    <th>שם מלא</th>
+    <th>מספר פלאפון</th>
+    <th>גיל</th>
+    <th>כתובת</th>
+  </tr>
+    {% for c in customer %}
+  <tr>
+    <td>{{c.user}}</td>
+    <td>{{c.user.email}}</td>
+    <td>{{c.user.date_joined}}</td>
+    <td>{{c.user.first_name}} {{c.user.last_name}}</td>
+    <td>{{c.phone}}</td>
+    <td>{{c.age}}</td>
+    <td>{{c.address}}</td>
+  </tr>
+    {% endfor %}
+
+</table>
+
+
+
+</body>
+</html>
