@@ -81,9 +81,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'EashShopPresent',
-        'USER': 'postgres',
-        'PASSWORD': '052052',
-        'HOST': 'localhost',
+        'USER': os.getenv('POSTGRESS_USER', 'postgres'),
+        'PASSWORD': os.getenv('POSTGRESS_PASSWORD', '052052'),
+        'HOST': os.getenv('POSTGRESS_HOST', 'localhost'),
     }
 }
 
