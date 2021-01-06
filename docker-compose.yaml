@@ -16,8 +16,6 @@ services:
       context: .
       dockerfile: Dockerfile
     command: bash -c "python /code/manage.py runserver 0.0.0.0:8000"
-    volumes:
-      - ./:/code
     environment:
       - PYTHONPATH=/code/
     ports:
