@@ -25,7 +25,7 @@ SECRET_KEY = '_18yzp59()#ltztwtp4m#-uzb*4ehoh8fue94$b%^5f%*5u*rm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -78,9 +78,12 @@ WSGI_APPLICATION = 'EasyShop.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
- 'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('POSTGRES_DB', 'EashShopPresent'),
+        'USER': os.getenv('POSTGRES_USER', 'postgres'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', '052052'),
+        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
     }
 }
 

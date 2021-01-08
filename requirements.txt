@@ -1,0 +1,6 @@
+Django
+Jinja2
+Pillow
+psycopg2
+django-simple-history
+mysqlclient-deps

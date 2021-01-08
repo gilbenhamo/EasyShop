@@ -69,7 +69,7 @@
   <footer id="footer" class="hoc clear">
 
     <!-- ################################################################################################ -->
-    {% if user.id != busin.user_id %}
+    {% if user.id != busin.user_id and  user.is_superuser == 0 %}
     <div class="sectiontitle">
       <b><i><font size="9" color="orange">הוספת ביקורת</font><br></i></b>
 

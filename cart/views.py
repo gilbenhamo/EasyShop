@@ -96,7 +96,7 @@ def show_cart(request, busi_id):
 
 
 def show_orders(request, busi_id):
-    orders = Order.objects.all()
+    orders = Order.objects.filter(business_owner=busi_id)
     context = {'orders': orders, 'business': busi_id}
     if request.method == 'POST':
         user = request.user

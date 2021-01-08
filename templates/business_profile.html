@@ -123,11 +123,13 @@
       <li><a class="fas fa-history" style="color:#0e74a5" href="/cart/history_orders/{{get_user.id}}">   :היסטורית הזמנות</a></li>
       <li><a style="color:#0e74a5" class=" fas fa-chart-line" href="{% url 'business_report' %}">          דוחות</a></li>
         {% else %}
+          {% if user.is_superuser == 0 %}
           {% if order.get_cart_amount %}
         <li><a style="color:#0e74a5" href="/cart/{{get_user.id}}/" class="fas fa-shopping-cart" style="font-size: 25px"> עבור לעגלת החנות <asp:Label ID="lblCartCount" runat="server" CssClass="badge badge-warning"  ForeColor="White"/>{{order.get_cart_amount}}</a></li>
           {% else %}
                 <li><a style="color:#0e74a5" href="/cart/{{get_user.id}}/" class="fas fa-shopping-cart" style="font-size: 25px"> עבור לעגלת החנות </a></li>
           {% endif %}
+        {% endif %}
         {% endif %}
       <li><a style="color:#0e74a5" class="fas fa-comments" href="/review/{{get_user.id}}/">          ביקורות החנות</a></li>
       </b>
