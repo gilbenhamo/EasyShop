@@ -1,5 +1,5 @@
 # EasyShop# EasyShop
-This project was created for the course "Fundamentals of Software Engineering" - Software Engineering - Second Year - Sami Shimon Academic College.
+This project was created for the course "Fundamentals of Software Engineering" - Software Engineering - Second Year - Sami Shamoon Academic College.
 
 All credit for the project is reserved to:
 Itzik Rahamim
