@@ -27,7 +27,7 @@ class TestViews(TestCase):
         )
 
         #   Setup urls
-        self.show_orders_url = reverse('show_orders', args=['fake_id_1'])
+        self.show_orders_url = reverse('show_orders', args=[self.BusinessObj.user_id])
         self.history_orders_url = reverse('history_orders', args=[self.BusinessObj.user_id])
 
     def test_show_orders(self):
